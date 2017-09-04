@@ -1,6 +1,6 @@
 <?php
 
-$result = [ 'xmp-exif' =>
+return [ 'xmp-exif' =>
 	[
 		'FNumber' => '28/10',
 	]

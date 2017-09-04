@@ -1,6 +1,6 @@
 <?php
 
-$result = [ 'xmp-exif' =>
+return [ 'xmp-exif' =>
 	[
 		'GPSAltitude' => -3.14159265301,
 		'GPSDOP' => '5/1',

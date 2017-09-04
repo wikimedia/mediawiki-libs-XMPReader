@@ -1,6 +1,6 @@
 <?php
 
-$result = [
+return [
 	'xmp-general' => [
 		'Artist' => [
 			'_type' => 'ul',

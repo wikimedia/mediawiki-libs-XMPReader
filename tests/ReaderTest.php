@@ -77,8 +77,7 @@ class ReaderTest extends PHPUnit_Framework_TestCase {
 			// I'm not sure if this is the best way to handle getting the
 			// result array, but it seems kind of big to put directly in the test
 			// file.
-			$result = null;
-			include $xmpPath . $file[0] . '.result.php';
+			$result = require $xmpPath . $file[0] . '.result.php';
 			$data[] = [ $xmp, $result, '[' . $file[0] . '.xmp] ' . $file[1] ];
 		}
 

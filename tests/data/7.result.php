@@ -1,5 +1,5 @@
 <?php
-$result = [
+return [
 	'xmp-exif' =>
 	[
 		'CameraOwnerName' => 'Me!',
