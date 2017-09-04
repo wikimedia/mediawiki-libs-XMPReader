@@ -13,7 +13,7 @@ class XMPValidateTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider provideDates
-	 * @covers XMPValidate::validateDate
+	 * @covers \XMPReader\Validate::validateDate
 	 */
 	public function testValidateDate( $value, $expected ) {
 		// The method should modify $value.

@@ -7,7 +7,7 @@ use XMPReader\Reader;
 
 /**
  * @group Media
- * @covers Reader
+ * @covers \XMPReader\Reader
  */
 class ReaderTest extends PHPUnit_Framework_TestCase {
 
@@ -29,7 +29,7 @@ class ReaderTest extends PHPUnit_Framework_TestCase {
 	 * @throws \Exception
 	 * @dataProvider provideXMPParse
 	 *
-	 * @covers Reader::parse
+	 * @covers \XMPReader\Reader::parse
 	 */
 	public function testXMPParse( $xmp, $expected, $info ) {
 		if ( !is_string( $xmp ) || !is_array( $expected ) ) {
@@ -90,7 +90,7 @@ class ReaderTest extends PHPUnit_Framework_TestCase {
 	 * @todo This is based on what the standard says. Need to find a real
 	 * world example file to double check the support for this is right.
 	 *
-	 * @covers Reader::parseExtended
+	 * @covers \XMPReader\Reader::parseExtended
 	 */
 	public function testExtendedXMP() {
 		$xmpPath = __DIR__ . '/data/';
@@ -122,7 +122,7 @@ class ReaderTest extends PHPUnit_Framework_TestCase {
 	 * This test has an extended XMP block with a wrong guid (md5sum)
 	 * and thus should only return the StandardXMP, not the ExtendedXMP.
 	 *
-	 * @covers Reader::parseExtended
+	 * @covers \XMPReader\Reader::parseExtended
 	 */
 	public function testExtendedXMPWithWrongGUID() {
 		$xmpPath = __DIR__ . '/data/';
@@ -153,7 +153,7 @@ class ReaderTest extends PHPUnit_Framework_TestCase {
 	 * Have a high offset to simulate a missing packet,
 	 * which should cause it to ignore the ExtendedXMP packet.
 	 *
-	 * @covers Reader::parseExtended
+	 * @covers \XMPReader\Reader::parseExtended
 	 */
 	public function testExtendedXMPMissingPacket() {
 		$xmpPath = __DIR__ . '/data/';
@@ -182,7 +182,7 @@ class ReaderTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * Test for multi-section, hostile XML
-	 * @covers Reader::checkParseSafety
+	 * @covers \XMPReader\Reader::checkParseSafety
 	 */
 	public function testCheckParseSafety() {
 		// Test for detection

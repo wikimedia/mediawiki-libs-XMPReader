@@ -30,7 +30,7 @@
 		"fix": "phpcbf",
 		"test": [
 			"parallel-lint . --exclude vendor",
-			"phpunit",
+			"phpunit --coverage-html coverage",
 			"phpcs -p -s"
 		]
 	}
