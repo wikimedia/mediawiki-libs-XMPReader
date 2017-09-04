@@ -23,6 +23,7 @@
 
 namespace XMPReader;
 
+use Psr\Log\LoggerAwareTrait;
 use Psr\Log\LoggerInterface;
 use Psr\Log\LoggerAwareInterface;
 use Wikimedia\Timestamp\ConvertibleTimestamp;
@@ -47,11 +48,7 @@ use Wikimedia\Timestamp\ConvertibleTimestamp;
  * @see http://www.adobe.com/devnet/xmp/pdfs/XMPSpecificationPart2.pdf starting at pg 11
  */
 class Validate implements LoggerAwareInterface {
-
-	/**
-	 * @var LoggerInterface
-	 */
-	private $logger;
+	use LoggerAwareTrait;
 
 	/**
 	 * Create new instance, with a logger
@@ -62,14 +59,6 @@ class Validate implements LoggerAwareInterface {
 		$this->setLogger( $logger );
 	}
 
-	/**
-	 * Set a logger instance
-	 *
-	 * @param LoggerInterface $logger
-	 */
-	public function setLogger( LoggerInterface $logger ) {
-		$this->logger = $logger;
-	}
 	/**
 	 * Function to validate boolean properties ( True or False )
 	 *

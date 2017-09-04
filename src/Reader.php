@@ -24,6 +24,7 @@
 namespace XMPReader;
 
 use Psr\Log\LoggerAwareInterface;
+use Psr\Log\LoggerAwareTrait;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use RuntimeException;
@@ -55,6 +56,8 @@ use XMLReader;
  * read rdf.
  */
 class Reader implements LoggerAwareInterface {
+	use LoggerAwareTrait;
+
 	/** @var array XMP item configuration array */
 	protected $items;
 
@@ -129,11 +132,6 @@ class Reader implements LoggerAwareInterface {
 	const PARSABLE_NO = 3;
 
 	/**
-	 * @var LoggerInterface
-	 */
-	private $logger;
-
-	/**
 	 * Primary job is to initialize the XMLParser
 	 *
 	 * @param LoggerInterface|null $logger Logger instance if available
@@ -152,15 +150,6 @@ class Reader implements LoggerAwareInterface {
 		$this->items = Info::getItems();
 
 		$this->resetXMLParser();
-	}
-
-	/**
-	 * Set a logger instance
-	 *
-	 * @param LoggerInterface $logger
-	 */
-	public function setLogger( LoggerInterface $logger ) {
-		$this->logger = $logger;
 	}
 
 	/**
