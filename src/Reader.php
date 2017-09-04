@@ -135,6 +135,8 @@ class Reader implements LoggerAwareInterface {
 
 	/**
 	 * Primary job is to initialize the XMLParser
+	 *
+	 * @param LoggerInterface|null $logger Logger instance if available
 	 */
 	function __construct( LoggerInterface $logger = null ) {
 		if ( !function_exists( 'xml_parser_create_ns' ) ) {
@@ -152,6 +154,11 @@ class Reader implements LoggerAwareInterface {
 		$this->resetXMLParser();
 	}
 
+	/**
+	 * Set a logger instance
+	 *
+	 * @param LoggerInterface $logger
+	 */
 	public function setLogger( LoggerInterface $logger ) {
 		$this->logger = $logger;
 	}
@@ -193,6 +200,8 @@ class Reader implements LoggerAwareInterface {
 
 	/**
 	 * Check if this instance supports using this class
+	 *
+	 * @return bool
 	 */
 	public static function isSupported() {
 		return function_exists( 'xml_parser_create_ns' ) && class_exists( 'XMLReader' );

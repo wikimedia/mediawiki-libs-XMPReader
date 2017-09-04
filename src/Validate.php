@@ -53,10 +53,20 @@ class Validate implements LoggerAwareInterface {
 	 */
 	private $logger;
 
+	/**
+	 * Create new instance, with a logger
+	 *
+	 * @param LoggerInterface $logger
+	 */
 	public function __construct( LoggerInterface $logger ) {
 		$this->setLogger( $logger );
 	}
 
+	/**
+	 * Set a logger instance
+	 *
+	 * @param LoggerInterface $logger
+	 */
 	public function setLogger( LoggerInterface $logger ) {
 		$this->logger = $logger;
 	}
