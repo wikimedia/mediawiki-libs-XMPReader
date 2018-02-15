@@ -2,14 +2,13 @@
 
 namespace XMPReader\Test;
 
-use PHPUnit_Framework_TestCase;
 use XMPReader\Reader;
 
 /**
  * @group Media
  * @covers \XMPReader\Reader
  */
-class ReaderTest extends PHPUnit_Framework_TestCase {
+class ReaderTest extends \PHPUnit\Framework\TestCase {
 
 	protected function setUp() {
 		parent::setUp();

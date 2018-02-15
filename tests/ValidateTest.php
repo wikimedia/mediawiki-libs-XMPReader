@@ -2,14 +2,13 @@
 
 namespace XMPReader\Test;
 
-use PHPUnit_Framework_TestCase;
 use Psr\Log\NullLogger;
 use XMPReader\Validate;
 
 /**
  * @group Media
  */
-class XMPValidateTest extends PHPUnit_Framework_TestCase {
+class XMPValidateTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider provideDates
