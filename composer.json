@@ -25,7 +25,7 @@
 	"require-dev": {
 		"ext-exif": "*",
 		"jakub-onderka/php-parallel-lint": "0.9.2",
-		"phpunit/phpunit": "4.8.35",
+		"phpunit/phpunit": "4.8.36",
 		"mediawiki/mediawiki-codesniffer": "16.0.0"
 	},
 	"scripts": {
