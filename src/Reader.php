@@ -336,9 +336,9 @@ class Reader implements LoggerAwareInterface {
 			}
 			if ( $this->charset !== 'UTF-8' ) {
 				// don't convert if already utf-8
-				\MediaWiki\suppressWarnings();
+				\Wikimedia\suppressWarnings();
 				$content = iconv( $this->charset, 'UTF-8//IGNORE', $content );
-				\MediaWiki\restoreWarnings();
+				\Wikimedia\restoreWarnings();
 			}
 
 			// Ensure the XMP block does not have an xml doctype declaration, which
