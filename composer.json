@@ -26,14 +26,19 @@
 		"ext-exif": "*",
 		"jakub-onderka/php-parallel-lint": "0.9.2",
 		"phpunit/phpunit": "4.8.36",
-		"mediawiki/mediawiki-codesniffer": "16.0.0"
+		"mediawiki/mediawiki-codesniffer": "16.0.0",
+		"mediawiki/minus-x": "0.3.1"
 	},
 	"scripts": {
-		"fix": "phpcbf",
+		"fix": [
+			"minus-x fix .",
+			"phpcbf"
+		],
 		"test": [
 			"parallel-lint . --exclude vendor",
 			"phpunit --coverage-html coverage",
-			"phpcs -p -s"
+			"phpcs -p -s",
+			"minus-x check ."
 		]
 	}
 }
