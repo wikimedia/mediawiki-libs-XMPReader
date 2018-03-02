@@ -1,7 +1,7 @@
 {
 	"name": "wikimedia/xmp-reader",
 	"description": "Reader for XMP data containing properties relevant to images",
-	"license": "GPL-2.0+",
+	"license": "GPL-2.0-or-later",
 	"homepage": "https://www.mediawiki.org/wiki/XMPReader",
 	"authors": [
 		{
