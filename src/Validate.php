@@ -21,7 +21,7 @@
  * @ingroup Media
  */
 
-namespace XMPReader;
+namespace Wikimedia\XMPReader;
 
 use Psr\Log\LoggerAwareTrait;
 use Psr\Log\LoggerInterface;

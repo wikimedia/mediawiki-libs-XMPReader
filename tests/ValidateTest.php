@@ -1,9 +1,9 @@
 <?php
 
-namespace XMPReader\Test;
+namespace Wikimedia\XMPReader\Test;
 
 use Psr\Log\NullLogger;
-use XMPReader\Validate;
+use Wikimedia\XMPReader\Validate;
 
 /**
  * @group Media
@@ -12,7 +12,7 @@ class ValidateTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider provideDates
-	 * @covers \XMPReader\Validate::validateDate
+	 * @covers \Wikimedia\XMPReader\Validate::validateDate
 	 */
 	public function testValidateDate( $value, $expected ) {
 		// The method should modify $value.

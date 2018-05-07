@@ -21,7 +21,7 @@
  * @ingroup Media
  */
 
-namespace XMPReader;
+namespace Wikimedia\XMPReader;
 
 /**
  * This class is just a container for a big array
