@@ -8,7 +8,7 @@ use XMPReader\Validate;
 /**
  * @group Media
  */
-class XMPValidateTest extends \PHPUnit\Framework\TestCase {
+class ValidateTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider provideDates
