@@ -570,7 +570,7 @@ class Reader implements LoggerAwareInterface {
 
 		// Even with LIBXML_NOWARNING set, XMLReader::read gives a warning
 		// when parsing truncated XML, which causes unit tests to fail.
-		\MediaWiki\suppressWarnings();
+		\Wikimedia\suppressWarnings();
 		while ( $reader->read() ) {
 			if ( $reader->nodeType === XMLReader::ELEMENT ) {
 				// Reached the first element without hitting a doctype declaration
@@ -584,7 +584,7 @@ class Reader implements LoggerAwareInterface {
 				break;
 			}
 		}
-		\MediaWiki\restoreWarnings();
+		\Wikimedia\restoreWarnings();
 
 		if ( !is_null( $result ) ) {
 			return $result;
