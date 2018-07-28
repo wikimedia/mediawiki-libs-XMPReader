@@ -646,7 +646,7 @@ class Reader implements LoggerAwareInterface {
 	 * Note this means we hit the closing element not the "</rdf:Seq>".
 	 *
 	 * @par For example, when processing:
-	 * @code{,xml}
+	 * @code{.xml}
 	 * <exif:ISOSpeedRatings> <rdf:Seq> <rdf:li>64</rdf:li>
 	 *   </rdf:Seq> </exif:ISOSpeedRatings>
 	 * @endcode
@@ -722,7 +722,7 @@ class Reader implements LoggerAwareInterface {
 	 * Note we still have to hit the outer "</property>"
 	 *
 	 * @par For example, when processing:
-	 * @code{,xml}
+	 * @code{.xml}
 	 * <exif:ISOSpeedRatings> <rdf:Seq> <rdf:li>64</rdf:li>
 	 *   </rdf:Seq> </exif:ISOSpeedRatings>
 	 * @endcode
