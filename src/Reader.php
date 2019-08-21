@@ -28,6 +28,7 @@ use Psr\Log\LoggerAwareTrait;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use RuntimeException;
+use Wikimedia\AtEase\AtEase;
 use Wikimedia\ScopedCallback;
 use XMLReader;
 
@@ -343,9 +344,9 @@ class Reader implements LoggerAwareInterface {
 			}
 			if ( $this->charset !== 'UTF-8' ) {
 				// don't convert if already utf-8
-				\Wikimedia\suppressWarnings();
+				AtEase::suppressWarnings();
 				$content = iconv( $this->charset, 'UTF-8//IGNORE', $content );
-				\Wikimedia\restoreWarnings();
+				AtEase::restoreWarnings();
 			}
 
 			// Ensure the XMP block does not have an xml doctype declaration, which
