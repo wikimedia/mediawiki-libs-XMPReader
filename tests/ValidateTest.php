@@ -53,4 +53,56 @@ class ValidateTest extends \PHPUnit\Framework\TestCase {
 			[ '2001-12T15:13', null ],
 		];
 	}
+
+	/**
+	 * @dataProvider provideClosedOptions
+	 * @covers \Wikimedia\XMPReader\Validate::validateClosed
+	 */
+	public function testValidateClosed( $info, $value, $expected ) {
+		// The method should modify $value.
+		$validate = new Validate( new NullLogger() );
+		$validate->validateClosed( $info, $value, true );
+		$this->assertEquals( $expected, $value );
+	}
+
+	public function provideClosedOptions() {
+		return [
+			[ [], '', null ],
+			[ [], '6', null ],
+			[ [ 'rangeLow' => -6, 'rangeHigh' => 8 ], '-6', '-6' ],
+			[ [ 'rangeLow' => 6, 'rangeHigh' => 8 ], '6', '6' ],
+			[ [ 'rangeLow' => 6, 'rangeHigh' => 8 ], '5', null ],
+			[ [ 'rangeLow' => 6, 'rangeHigh' => 8 ], '8', '8' ],
+			[ [ 'rangeLow' => 6, 'rangeHigh' => 8 ], '9', null ],
+			[ [], 'test', null ],
+			[ [ 'choices' => [] ], 'test', null ],
+			[ [ 'choices' => [ 'test' => true ] ], 'test', 'test' ],
+		];
+	}
+
+	/**
+	 * @dataProvider provideRangesForReal
+	 * @covers \Wikimedia\XMPReader\Validate::validateReal
+	 */
+	public function testValidateReal( $info, $value, $expected ) {
+		// The method should modify $value.
+		$validate = new Validate( new NullLogger() );
+		$validate->validateReal( $info, $value, true );
+		$this->assertEquals( $expected, $value );
+	}
+
+	public function provideRangesForReal() {
+		return [
+			[ [], '', null ],
+			[ [], 'null', null ],
+			[ [], '6.01', '6.01' ],
+			[ [], '6', '6' ],
+			[ [ 'rangeLow' => -6, 'rangeHigh' => 8 ], '-5.99', '-5.99' ],
+			[ [ 'rangeLow' => -6, 'rangeHigh' => 8 ], '-6.01', null ],
+			[ [ 'rangeLow' => 6, 'rangeHigh' => 8 ], '6', '6' ],
+			[ [ 'rangeLow' => 6, 'rangeHigh' => 8 ], '5.99', null ],
+			[ [ 'rangeLow' => 6, 'rangeHigh' => 8 ], '8', '8' ],
+			[ [ 'rangeLow' => 6, 'rangeHigh' => 8 ], '8.01', null ],
+		];
+	}
 }

@@ -56,6 +56,7 @@ class ReaderTest extends \PHPUnit\Framework\TestCase {
 			[ '5', 'Flash as qualifier 2' ],
 			[ '6', 'Multiple rdf:Description' ],
 			[ '7', 'Generic test of several property types' ],
+			[ '8', 'GPano property types' ],
 			[ 'flash', 'Test of Flash property' ],
 			[ 'invalid-child-not-struct', 'Test child props not in struct or ignored' ],
 			[ 'no-recognized-props', 'Test namespace and no recognized props' ],

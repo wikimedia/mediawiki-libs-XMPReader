@@ -1154,6 +1154,137 @@ class Info {
 			 * RegistryId
 			 */
 		],
+		'http://ns.google.com/photos/1.0/panorama/' => [
+			// https://developers.google.com/streetview/spherical-metadata
+			'UsePanoramaViewer' => [
+				'map_group' => 'general',
+				'mode' => Reader::MODE_SIMPLE,
+				'validate' => 'validateBoolean',
+			],
+			'CaptureSoftware' => [
+				'map_group' => 'general',
+				'mode' => Reader::MODE_SIMPLE,
+			],
+			'StitchingSoftware' => [
+				'map_group' => 'general',
+				'mode' => Reader::MODE_SIMPLE,
+			],
+			'ProjectionType' => [
+				'map_group' => 'general',
+				'mode' => Reader::MODE_SIMPLE,
+				'validate' => 'validateClosed',
+				'choices' => [
+					'equirectangular' => true,
+				]
+			],
+			'PoseHeadingDegrees' => [
+				'map_group' => 'general',
+				'mode' => Reader::MODE_SIMPLE,
+				'validate' => 'validateReal',
+				'rangeLow' => 0,
+				'rangeHigh' => 360,
+			],
+			'PosePitchDegrees' => [
+				'map_group' => 'general',
+				'mode' => Reader::MODE_SIMPLE,
+				'validate' => 'validateReal',
+				'rangeLow' => -90,
+				'rangeHigh' => 90,
+			],
+			'PoseRollDegrees' => [
+				'map_group' => 'general',
+				'mode' => Reader::MODE_SIMPLE,
+				'validate' => 'validateReal',
+				'rangeLow' => -180,
+				'rangeHigh' => 180,
+			],
+			'InitialViewHeadingDegrees' => [
+				'map_group' => 'general',
+				'mode' => Reader::MODE_SIMPLE,
+				'validate' => 'validateInteger',
+			],
+			'InitialViewRollDegrees' => [
+				'map_group' => 'general',
+				'mode' => Reader::MODE_SIMPLE,
+				'validate' => 'validateInteger',
+			],
+			'InitialViewRollDegrees' => [
+				'map_group' => 'general',
+				'mode' => Reader::MODE_SIMPLE,
+				'validate' => 'validateInteger',
+			],
+			'InitialHorizontalFOVDegrees' => [
+				'map_group' => 'general',
+				'mode' => Reader::MODE_SIMPLE,
+				'validate' => 'validateReal',
+				'rangeLow' => 0,
+				'rangeHigh' => 360,
+			],
+			'InitialVerticalFOVDegrees' => [
+				'map_group' => 'general',
+				'mode' => Reader::MODE_SIMPLE,
+				'validate' => 'validateReal',
+				'rangeLow' => 0,
+				'rangeHigh' => 360,
+			],
+			'FirstPhotoDate' => [
+				'map_group' => 'general',
+				'mode' => Reader::MODE_SIMPLE,
+				'validate' => 'validateDate',
+			],
+			'LastPhotoDate' => [
+				'map_group' => 'general',
+				'mode' => Reader::MODE_SIMPLE,
+				'validate' => 'validateDate',
+			],
+			'SourcePhotosCount' => [
+				'map_group' => 'general',
+				'mode' => Reader::MODE_SIMPLE,
+				'validate' => 'validateInteger',
+			],
+			'ExposureLockUsed' => [
+				'map_group' => 'general',
+				'mode' => Reader::MODE_SIMPLE,
+				'validate' => 'validateBoolean',
+			],
+			'CroppedAreaImageWidthPixels' => [
+				'map_group' => 'general',
+				'mode' => Reader::MODE_SIMPLE,
+				'validate' => 'validateInteger',
+			],
+			'CroppedAreaImageHeightPixels' => [
+				'map_group' => 'general',
+				'mode' => Reader::MODE_SIMPLE,
+				'validate' => 'validateInteger',
+			],
+			'FullPanoWidthPixels' => [
+				'map_group' => 'general',
+				'mode' => Reader::MODE_SIMPLE,
+				'validate' => 'validateInteger',
+			],
+			'FullPanoHeightPixels' => [
+				'map_group' => 'general',
+				'mode' => Reader::MODE_SIMPLE,
+				'validate' => 'validateInteger',
+			],
+			'CroppedAreaLeftPixels' => [
+				'map_group' => 'general',
+				'mode' => Reader::MODE_SIMPLE,
+				'validate' => 'validateInteger',
+			],
+			'CroppedAreaTopPixels' => [
+				'map_group' => 'general',
+				'mode' => Reader::MODE_SIMPLE,
+				'validate' => 'validateInteger',
+			],
+			'InitialCameraDolly' => [
+				'map_group' => 'general',
+				'mode' => Reader::MODE_SIMPLE,
+				'validate' => 'validateReal',
+				'rangeLow' => -1,
+				'rangeHigh' => 1,
+			],
+		]
 
 		/* Plus props we might want to consider:
 		 * (Note: some of these have unclear/incomplete definitions
