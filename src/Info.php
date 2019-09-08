@@ -46,7 +46,8 @@ class Info {
 	 * each containing an array of tags
 	 * each tag is an array of information about the
 	 * tag, including:
-	 *   * map_group - What group (used for precedence during conflicts).
+	 *   * map_group - What group (used for precedence during conflicts in
+	 *     accordance with http://www.metadataworkinggroup.org/pdf/mwg_guidance.pdf )
 	 *   * mode - What type of item (self::MODE_SIMPLE usually, see above for
 	 *     all values).
 	 *   * validate - Method to validate input. Could also post-process the

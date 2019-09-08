@@ -44,8 +44,11 @@ use Wikimedia\Timestamp\ConvertibleTimestamp;
  * These validation functions can also be used to modify the data. See the gps and flash one's
  * for example.
  *
- * @see http://www.adobe.com/devnet/xmp/pdfs/XMPSpecificationPart1.pdf starting at pg 28
- * @see http://www.adobe.com/devnet/xmp/pdfs/XMPSpecificationPart2.pdf starting at pg 11
+ * @see https://www.adobe.com/devnet/xmp.html
+ * @see https://wwwimages2.adobe.com/content/dam/acom/en/devnet/xmp/pdfs/
+ *      XMP%20SDK%20Release%20cc-2016-08/XMPSpecificationPart1.pdf starting at pg 28
+ * @see https://wwwimages2.adobe.com/content/dam/acom/en/devnet/xmp/pdfs/
+ *      XMP%20SDK%20Release%20cc-2016-08/XMPSpecificationPart2.pdf starting at pg 11
  */
 class Validate implements LoggerAwareInterface {
 	use LoggerAwareTrait;
