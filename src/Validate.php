@@ -188,6 +188,38 @@ class Validate implements LoggerAwareInterface {
 	}
 
 	/**
+	 * function to validate and modify real numbers, with ranges
+	 *
+	 * @param array $info Information about current property
+	 * @param mixed &$val Current value to validate
+	 * @param bool $standalone If this is a simple property or array
+	 */
+	public function validateReal( $info, &$val, $standalone ) {
+		if ( !$standalone ) {
+			// this only validates standalone properties, not arrays, etc
+			return;
+		}
+
+		$isReal = is_numeric( $val ) && (float)$val;
+		if ( !$isReal ) {
+			$this->logger->info( __METHOD__ . " Expected real, but got $val" );
+			$val = null;
+			return;
+		}
+
+		// check if its in a numeric range
+		if ( isset( $info['rangeLow'], $info['rangeHigh'] )
+			&& ( (float)$val > $info['rangeHigh'] || (float)$val < $info['rangeLow'] )
+		) {
+			$this->logger->info(
+			  __METHOD__
+			  . " Expected value within range of ${info['rangeLow']}-${info['rangeHigh']}, but got $val"
+			);
+			$val = null;
+		}
+	}
+
+	/**
 	 * function to validate and modify flash structure
 	 *
 	 * @param array $info Information about current property
