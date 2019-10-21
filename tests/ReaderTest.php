@@ -10,7 +10,7 @@ use Wikimedia\XMPReader\Reader;
  */
 class ReaderTest extends \PHPUnit\Framework\TestCase {
 
-	protected function setUp() {
+	protected function setUp() : void {
 		parent::setUp();
 		# Requires libxml to do XMP parsing
 		if ( !extension_loaded( 'exif' ) ) {
