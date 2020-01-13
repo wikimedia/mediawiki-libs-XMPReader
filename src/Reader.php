@@ -92,10 +92,10 @@ class Reader implements LoggerAwareInterface {
 	/** @var int */
 	private $extendedXMPOffset = 0;
 
-	/** @var int Flag determining if the XMP is safe to parse **/
+	/** @var int Flag determining if the XMP is safe to parse */
 	private $parsable = 0;
 
-	/** @var string Buffer of XML to parse **/
+	/** @var string Buffer of XML to parse */
 	private $xmlParsableBuffer = '';
 
 	/**
@@ -583,7 +583,7 @@ class Reader implements LoggerAwareInterface {
 		}
 		\Wikimedia\restoreWarnings();
 
-		if ( !is_null( $result ) ) {
+		if ( $result !== null ) {
 			return $result;
 		}
 
@@ -691,7 +691,7 @@ class Reader implements LoggerAwareInterface {
 			} elseif ( is_callable( $validate ) ) {
 				$val =& $this->results['xmp-' . $info['map_group']][$finalName];
 				call_user_func_array( $validate, [ $info, &$val, false ] );
-				if ( is_null( $val ) ) {
+				if ( $val === null ) {
 					// the idea being the validation function will unset the variable if
 					// its invalid.
 					$this->logger->info(
@@ -1404,7 +1404,7 @@ class Reader implements LoggerAwareInterface {
 				call_user_func_array( $validate, [ $info, &$val, true ] );
 				// the reasoning behind using &$val instead of using the return value
 				// is to be consistent between here and validating structures.
-				if ( is_null( $val ) ) {
+				if ( $val === null ) {
 					$this->logger->info(
 						__METHOD__ . " <$ns:$tag> failed validation.",
 						[ 'file' => $this->filename ]

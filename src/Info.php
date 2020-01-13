@@ -578,7 +578,7 @@ class Info {
 				'map_group' => 'exif',
 				'mode' => Reader::MODE_SIMPLE,
 			],
-			/**** Do not extract this property
+			/** Do not extract this property
 			 * It interferes with auto exif rotation.
 			 * 'Orientation'       => array(
 			 *    'map_group' => 'exif',
@@ -586,8 +586,8 @@ class Info {
 			 *    'validate'  => 'validateClosed',
 			 *    'choices'   => array( '1' => true, '2' => true, '3' => true, '4' => true, 5 => true,
 			 *            '6' => true, '7' => true, '8' => true ),
-			 *),
-			 ******/
+			 * ),
+			 */
 			'PhotometricInterpretation' => [
 				'map_group' => 'exif',
 				'mode' => Reader::MODE_SIMPLE,
@@ -652,7 +652,7 @@ class Info {
 				'validate' => 'validateClosed',
 				'choices' => [ '1' => true, '2' => true ],
 			],
-			/********
+			/**
 			 * Disable extracting this property (T33944)
 			 * Several files have a string instead of a Seq
 			 * for this property. Reader doesn't handle
