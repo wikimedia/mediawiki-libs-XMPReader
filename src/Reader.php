@@ -549,10 +549,18 @@ class Reader implements LoggerAwareInterface {
 		$reader = new XMLReader();
 		$result = null;
 
+		// Pull in the arbitrary MAX_URI_LENGTH from libxml2...
+		$maxUriLength = 1024 * 1024;
+		$dataUri = 'data://text/plain,' . urlencode( $content );
+		if ( strlen( $dataUri ) > $maxUriLength ) {
+			// libxml2 won't parse this file as a data URI due to the length.
+			return false;
+		}
+
 		// For XMLReader to parse incomplete/invalid XML, it has to be open()'ed
 		// instead of using XML().
 		$reader->open(
-			'data://text/plain,' . urlencode( $content ),
+			$dataUri,
 			null,
 			LIBXML_NOERROR | LIBXML_NOWARNING | LIBXML_NONET
 		);
