@@ -22,7 +22,7 @@
 		}
 	},
 	"require": {
-		"php": ">=5.6.99",
+		"php": ">=7.2.9",
 		"ext-iconv": "*",
 		"ext-xml": "*",
 		"wikimedia/at-ease": "1.2 || 2.0",

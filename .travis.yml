@@ -1,10 +1,9 @@
 sudo: false
 language: php
 php:
-  - "7.0"
-  - "7.1"
   - "7.2"
-  - "hhvm-3.18"
+  - "7.3"
+  - "7.4"
 env:
   global:
     - COMPOSER_DISABLE_XDEBUG_WARN=1
