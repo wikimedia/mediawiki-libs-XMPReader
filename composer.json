@@ -25,7 +25,7 @@
 		"php": ">=7.2.9",
 		"ext-iconv": "*",
 		"ext-xml": "*",
-		"wikimedia/at-ease": "1.2 || 2.0",
+		"wikimedia/at-ease": "2.0.0",
 		"psr/log": "^1.0",
 		"wikimedia/scoped-callback": "^1.0 || ^2.0 || ^3.0",
 		"wikimedia/timestamp": "^1.0 || ^2.0 || ^3.0"
