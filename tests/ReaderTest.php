@@ -36,7 +36,7 @@ class ReaderTest extends \PHPUnit\Framework\TestCase {
 		}
 		$reader = new Reader;
 		$reader->parse( $xmp );
-		$this->assertEquals( $expected, $reader->getResults(), $info, 0.0000000001 );
+		$this->assertEqualsWithDelta( $expected, $reader->getResults(), 0.0000000001, $info );
 	}
 
 	public static function provideXMPParse() {
