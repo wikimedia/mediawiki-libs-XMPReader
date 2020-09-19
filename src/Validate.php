@@ -330,7 +330,8 @@ class Validate implements LoggerAwareInterface {
 			return;
 		}
 
-		if ( !isset( $res[4] ) ) { // hour
+		// hour
+		if ( !isset( $res[4] ) ) {
 			// just have the year month day (if that)
 			$val = $res[1];
 			if ( isset( $res[2] ) ) {
