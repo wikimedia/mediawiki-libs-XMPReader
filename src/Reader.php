@@ -112,30 +112,30 @@ class Reader implements LoggerAwareInterface {
 	 * a property we're not interested in. So if a new
 	 * element pops up when we're in that mode, we ignore it.
 	 */
-	const MODE_INITIAL = 0;
-	const MODE_IGNORE = 1;
-	const MODE_LI = 2;
-	const MODE_LI_LANG = 3;
-	const MODE_QDESC = 4;
+	private const MODE_INITIAL = 0;
+	private const MODE_IGNORE = 1;
+	private const MODE_LI = 2;
+	private const MODE_LI_LANG = 3;
+	private const MODE_QDESC = 4;
 
 	// The following MODE constants are also used in the
 	// $items array to denote what type of property the item is.
-	const MODE_SIMPLE = 10;
-	const MODE_STRUCT = 11; // structure (associative array)
-	const MODE_SEQ = 12; // ordered list
-	const MODE_BAG = 13; // unordered list
-	const MODE_LANG = 14;
-	const MODE_ALT = 15; // non-language alt. Currently not implemented, and not needed atm.
-	const MODE_BAGSTRUCT = 16; // A BAG of Structs.
+	public const MODE_SIMPLE = 10;
+	public const MODE_STRUCT = 11; // structure (associative array)
+	public const MODE_SEQ = 12; // ordered list
+	public const MODE_BAG = 13; // unordered list
+	public const MODE_LANG = 14;
+	public const MODE_ALT = 15; // non-language alt. Currently not implemented, and not needed atm.
+	public const MODE_BAGSTRUCT = 16; // A BAG of Structs.
 
-	const NS_RDF = 'http://www.w3.org/1999/02/22-rdf-syntax-ns#';
-	const NS_XML = 'http://www.w3.org/XML/1998/namespace';
+	private const NS_RDF = 'http://www.w3.org/1999/02/22-rdf-syntax-ns#';
+	private const NS_XML = 'http://www.w3.org/XML/1998/namespace';
 
 	// States used while determining if XML is safe to parse
-	const PARSABLE_UNKNOWN = 0;
-	const PARSABLE_OK = 1;
-	const PARSABLE_BUFFERING = 2;
-	const PARSABLE_NO = 3;
+	private const PARSABLE_UNKNOWN = 0;
+	private const PARSABLE_OK = 1;
+	private const PARSABLE_BUFFERING = 2;
+	private const PARSABLE_NO = 3;
 
 	/**
 	 * Primary job is to initialize the XMLParser
