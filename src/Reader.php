@@ -121,12 +121,17 @@ class Reader implements LoggerAwareInterface {
 	// The following MODE constants are also used in the
 	// $items array to denote what type of property the item is.
 	public const MODE_SIMPLE = 10;
-	public const MODE_STRUCT = 11; // structure (associative array)
-	public const MODE_SEQ = 12; // ordered list
-	public const MODE_BAG = 13; // unordered list
+	// structure (associative array)
+	public const MODE_STRUCT = 11;
+	// ordered list
+	public const MODE_SEQ = 12;
+	// unordered list
+	public const MODE_BAG = 13;
 	public const MODE_LANG = 14;
-	public const MODE_ALT = 15; // non-language alt. Currently not implemented, and not needed atm.
-	public const MODE_BAGSTRUCT = 16; // A BAG of Structs.
+	// non-language alt. Currently not implemented, and not needed atm.
+	public const MODE_ALT = 15;
+	// A BAG of Structs.
+	public const MODE_BAGSTRUCT = 16;
 
 	private const NS_RDF = 'http://www.w3.org/1999/02/22-rdf-syntax-ns#';
 	private const NS_XML = 'http://www.w3.org/XML/1998/namespace';
@@ -143,7 +148,7 @@ class Reader implements LoggerAwareInterface {
 	 * @param LoggerInterface|null $logger Logger instance if available
 	 * @param string $filename
 	 */
-	function __construct( LoggerInterface $logger = null, $filename = 'unknown' ) {
+	public function __construct( LoggerInterface $logger = null, $filename = 'unknown' ) {
 		if ( !function_exists( 'xml_parser_create_ns' ) ) {
 			// this should already be checked by this point
 			throw new RuntimeException( 'XMP support requires XML Parser' );
@@ -392,7 +397,8 @@ class Reader implements LoggerAwareInterface {
 						'offset' => $offset,
 						'content' => $content,
 				] );
-				$this->results = []; // blank if error.
+				// blank if error.
+				$this->results = [];
 				$this->destroyXMLParser();
 				return false;
 			}
@@ -509,7 +515,7 @@ class Reader implements LoggerAwareInterface {
 	 * @param string $data Character data
 	 * @throws RuntimeException On invalid data
 	 */
-	function char( $parser, $data ) {
+	public function char( $parser, $data ) {
 		$data = trim( $data );
 		if ( trim( $data ) === "" ) {
 			return;
@@ -641,7 +647,8 @@ class Reader implements LoggerAwareInterface {
 			}
 			$this->saveValue( $ns, $tag, $this->charContent );
 
-			$this->charContent = false; // reset
+			// reset
+			$this->charContent = false;
 		}
 		array_shift( $this->curItem );
 		array_shift( $this->mode );
@@ -811,7 +818,7 @@ class Reader implements LoggerAwareInterface {
 	 * @param string $elm Namespace . ' ' . element name
 	 * @throws RuntimeException
 	 */
-	function endElement( $parser, $elm ) {
+	public function endElement( $parser, $elm ) {
 		if ( $elm === ( self::NS_RDF . ' RDF' )
 			|| $elm === 'adobe:ns:meta/ xmpmeta'
 			|| $elm === 'adobe:ns:meta/ xapmeta'
@@ -1030,7 +1037,8 @@ class Reader implements LoggerAwareInterface {
 	 */
 	private function startElementModeQDesc( $elm ) {
 		if ( $elm === self::NS_RDF . ' value' ) {
-			return; // do nothing
+			// do nothing
+			return;
 		}
 
 		// otherwise its a qualifier, which we ignore
@@ -1242,7 +1250,7 @@ class Reader implements LoggerAwareInterface {
 	 * @param array $attribs Attribute name => value
 	 * @throws RuntimeException
 	 */
-	function startElement( $parser, $elm, $attribs ) {
+	public function startElement( $parser, $elm, $attribs ) {
 		if ( $elm === self::NS_RDF . ' RDF'
 			|| $elm === 'adobe:ns:meta/ xmpmeta'
 			|| $elm === 'adobe:ns:meta/ xapmeta'
@@ -1324,7 +1332,6 @@ class Reader implements LoggerAwareInterface {
 		}
 	}
 
-	// @codingStandardsIgnoreStart Generic.Files.LineLength
 	/**
 	 * Process attributes.
 	 * Simple values can be stored as either a tag or attribute
@@ -1334,13 +1341,13 @@ class Reader implements LoggerAwareInterface {
 	 *
 	 * @par Example:
 	 * @code
-	 * <rdf:Description rdf:about="" xmlns:exif="http://ns.adobe.com/exif/1.0/" exif:DigitalZoomRatio="0/10">
+	 * <rdf:Description rdf:about=""
+	 * 	xmlns:exif="http://ns.adobe.com/exif/1.0/" exif:DigitalZoomRatio="0/10">
 	 * @endcode
 	 *
 	 * @param array $attribs Array attribute=>value
 	 * @throws RuntimeException
 	 */
-	// @codingStandardsIgnoreEnd
 	private function doAttribs( $attribs ) {
 		// first check for rdf:parseType attribute, as that can change
 		// how the attributes are interperted.

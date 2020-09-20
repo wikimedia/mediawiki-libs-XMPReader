@@ -97,7 +97,8 @@ class ReaderTest extends \PHPUnit\Framework\TestCase {
 		$standardXMP = file_get_contents( $xmpPath . 'xmpExt.xmp' );
 		$extendedXMP = file_get_contents( $xmpPath . 'xmpExt2.xmp' );
 
-		$md5sum = '28C74E0AC2D796886759006FBE2E57B7'; // of xmpExt2.xmp
+		// md5sum of xmpExt2.xmp
+		$md5sum = '28C74E0AC2D796886759006FBE2E57B7';
 		$length = pack( 'N', strlen( $extendedXMP ) );
 		$offset = pack( 'N', 0 );
 		$extendedPacket = $md5sum . $length . $offset . $extendedXMP;
@@ -129,7 +130,8 @@ class ReaderTest extends \PHPUnit\Framework\TestCase {
 		$standardXMP = file_get_contents( $xmpPath . 'xmpExt.xmp' );
 		$extendedXMP = file_get_contents( $xmpPath . 'xmpExt2.xmp' );
 
-		$md5sum = '28C74E0AC2D796886759006FBE2E57B9'; // Note last digit.
+		// Note last digit is wrong (proper hash is 28C74E0AC2D796886759006FBE2E57B7)
+		$md5sum = '28C74E0AC2D796886759006FBE2E57B9';
 		$length = pack( 'N', strlen( $extendedXMP ) );
 		$offset = pack( 'N', 0 );
 		$extendedPacket = $md5sum . $length . $offset . $extendedXMP;
@@ -160,7 +162,8 @@ class ReaderTest extends \PHPUnit\Framework\TestCase {
 		$standardXMP = file_get_contents( $xmpPath . 'xmpExt.xmp' );
 		$extendedXMP = file_get_contents( $xmpPath . 'xmpExt2.xmp' );
 
-		$md5sum = '28C74E0AC2D796886759006FBE2E57B7'; // of xmpExt2.xmp
+		// md5sum of xmpExt2.xmp
+		$md5sum = '28C74E0AC2D796886759006FBE2E57B7';
 		$length = pack( 'N', strlen( $extendedXMP ) );
 		$offset = pack( 'N', 2048 );
 		$extendedPacket = $md5sum . $length . $offset . $extendedXMP;
