@@ -149,10 +149,6 @@ class Reader implements LoggerAwareInterface {
 	 * @param string $filename
 	 */
 	public function __construct( LoggerInterface $logger = null, $filename = 'unknown' ) {
-		if ( !function_exists( 'xml_parser_create_ns' ) ) {
-			// this should already be checked by this point
-			throw new RuntimeException( 'XMP support requires XML Parser' );
-		}
 		if ( $logger ) {
 			$this->setLogger( $logger );
 		} else {
@@ -571,12 +567,15 @@ class Reader implements LoggerAwareInterface {
 			LIBXML_NOERROR | LIBXML_NOWARNING | LIBXML_NONET
 		);
 
-		$oldDisable = libxml_disable_entity_loader( true );
-		/** @noinspection PhpUnusedLocalVariableInspection */
-		$reset = new ScopedCallback(
-			'libxml_disable_entity_loader',
-			[ $oldDisable ]
-		);
+		if ( LIBXML_VERSION < 20900 ) {
+			$oldDisable = libxml_disable_entity_loader( true );
+			/** @noinspection PhpUnusedLocalVariableInspection */
+			$reset = new ScopedCallback(
+				'libxml_disable_entity_loader',
+				[ $oldDisable ]
+			);
+		}
+
 		$reader->setParserProperty( XMLReader::SUBST_ENTITIES, false );
 
 		// Even with LIBXML_NOWARNING set, XMLReader::read gives a warning
