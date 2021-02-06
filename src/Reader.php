@@ -202,7 +202,7 @@ class Reader implements LoggerAwareInterface {
 	 * @return bool
 	 */
 	public static function isSupported() {
-		return function_exists( 'xml_parser_create_ns' ) && class_exists( 'XMLReader' );
+		return function_exists( 'xml_parser_create_ns' ) && class_exists( XMLReader::class );
 	}
 
 	/** Get the result array. Do some post-processing before returning
