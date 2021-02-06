@@ -400,9 +400,10 @@ class Reader implements LoggerAwareInterface {
 			}
 		} catch ( \Exception $e ) {
 			$this->logger->warning(
-				'{method} {exception}',
+				'{method} {message}',
 				[
 					'method' => __METHOD__,
+					'message' => $e->getMessage(),
 					'exception' => $e,
 					'file' => $this->filename,
 					'content' => $content,
