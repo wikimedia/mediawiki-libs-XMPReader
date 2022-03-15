@@ -35,6 +35,7 @@
 	"require-dev": {
 		"ext-exif": "*",
 		"mediawiki/mediawiki-codesniffer": "38.0.0",
+		"mediawiki/mediawiki-phan-config": "0.11.1",
 		"mediawiki/minus-x": "1.1.1",
 		"ockcyp/covers-validator": "1.3.3",
 		"php-parallel-lint/php-console-highlighter": "0.5.0",
@@ -47,6 +48,7 @@
 			"phpunit",
 			"covers-validator",
 			"@phpcs",
+			"phan --allow-polyfill-parser --long-progress-bar",
 			"minus-x check ."
 		],
 		"cover": "phpunit --coverage-html coverage",
@@ -54,6 +56,7 @@
 			"minus-x fix .",
 			"phpcbf"
 		],
+		"phan": "phan --allow-polyfill-parser --long-progress-bar",
 		"phpcs": "phpcs -sp"
 	}
 }
