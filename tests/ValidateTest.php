@@ -13,6 +13,86 @@ use Wikimedia\XMPReader\Validate;
 class ValidateTest extends \PHPUnit\Framework\TestCase {
 
 	/**
+	 * @dataProvider provideBoolean
+	 */
+	public function testValidateBoolean( $value, $expected ) {
+		$validate = new Validate( new NullLogger() );
+		$validate->validateBoolean( [], $value, true );
+		$this->assertEquals( $expected, $value );
+	}
+
+	public static function provideBoolean() {
+		return [
+			// [ 'True', 'True' ],
+			// [ 'False', 'False' ],
+
+			// Invalid
+			// [ true, null ],
+			[ 'true', null ],
+			[ false, null ],
+			[ 'false', null ],
+			[ 'lol', null ],
+		];
+	}
+
+	/**
+	 * @dataProvider provideRational
+	 */
+	public function testValidateRational( $value, $expected ) {
+		$validate = new Validate( new NullLogger() );
+		$validate->validateRational( [], $value, true );
+		$this->assertEquals( $expected, $value );
+	}
+
+	public static function provideRational() {
+		return [
+			[ '12/10', '12/10' ],
+
+			// Invalid
+			[ 'lol', null ],
+		];
+	}
+
+	/**
+	 * @dataProvider provideBoolean
+	 */
+	public function testValidateInteger( $value, $expected ) {
+		$validate = new Validate( new NullLogger() );
+		$validate->validateInteger( [], $value, true );
+		$this->assertEquals( $expected, $value );
+	}
+
+	public static function provideInteger() {
+		return [
+			[ '1', '1' ],
+
+			// Invalid
+			[ 'lol', null ],
+		];
+	}
+
+	/**
+	 * @dataProvider provideLangCode
+	 */
+	public function testValidateLangCode( $value, $expected ) {
+		$validate = new Validate( new NullLogger() );
+		$validate->validateLangCode( [], $value, true );
+		$this->assertEquals( $expected, $value );
+	}
+
+	public static function provideLangCode() {
+		return [
+			[ 'en', 'en' ],
+			[ 'en-gb', 'en-gb' ],
+			// Not a language code, but the validator is very loose
+			[ 'lol', 'lol' ],
+
+			// Invalid
+			[ 'a', null ],
+		];
+	}
+
+	/**
 	 * @dataProvider provideDates
 	 */
 	public function testValidateDate( $value, $expected ) {
