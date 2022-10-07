@@ -7,12 +7,13 @@ use Wikimedia\XMPReader\Validate;
 
 /**
  * @group Media
+ *
+ * @covers \Wikimedia\XMPReader\Validate
  */
 class ValidateTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider provideDates
-	 * @covers \Wikimedia\XMPReader\Validate::validateDate
 	 */
 	public function testValidateDate( $value, $expected ) {
 		// The method should modify $value.
@@ -56,7 +57,6 @@ class ValidateTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider provideClosedOptions
-	 * @covers \Wikimedia\XMPReader\Validate::validateClosed
 	 */
 	public function testValidateClosed( $info, $value, $expected ) {
 		// The method should modify $value.
@@ -82,7 +82,6 @@ class ValidateTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider provideRangesForReal
-	 * @covers \Wikimedia\XMPReader\Validate::validateReal
 	 */
 	public function testValidateReal( $info, $value, $expected ) {
 		// The method should modify $value.
