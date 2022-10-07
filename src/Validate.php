@@ -72,7 +72,9 @@ class Validate implements LoggerAwareInterface {
 	public function validateBoolean( $info, &$val, $standalone ) {
 		if ( !$standalone ) {
 			// this only validates standalone properties, not arrays, etc
+			// @codeCoverageIgnoreStart
 			return;
+			// @codeCoverageIgnoreEnd
 		}
 		if ( $val !== 'True' && $val !== 'False' ) {
 			$this->logger->info( __METHOD__ . " Expected True or False but got $val" );
@@ -90,7 +92,9 @@ class Validate implements LoggerAwareInterface {
 	public function validateRational( $info, &$val, $standalone ) {
 		if ( !$standalone ) {
 			// this only validates standalone properties, not arrays, etc
+			// @codeCoverageIgnoreStart
 			return;
+			// @codeCoverageIgnoreEnd
 		}
 		if ( !preg_match( '/^(?:-?\d+)\/(?:\d+[1-9]|[1-9]\d*)$/D', $val ) ) {
 			$this->logger->info( __METHOD__ . " Expected rational but got $val" );
@@ -111,7 +115,9 @@ class Validate implements LoggerAwareInterface {
 	public function validateRating( $info, &$val, $standalone ) {
 		if ( !$standalone ) {
 			// this only validates standalone properties, not arrays, etc
+			// @codeCoverageIgnoreStart
 			return;
+			// @codeCoverageIgnoreEnd
 		}
 		if ( !preg_match( '/^[-+]?\d*(?:\.?\d*)$/D', $val )
 			|| !is_numeric( $val )
@@ -148,7 +154,9 @@ class Validate implements LoggerAwareInterface {
 	public function validateInteger( $info, &$val, $standalone ) {
 		if ( !$standalone ) {
 			// this only validates standalone properties, not arrays, etc
+			// @codeCoverageIgnoreStart
 			return;
+			// @codeCoverageIgnoreEnd
 		}
 		if ( !preg_match( '/^[-+]?\d+$/D', $val ) ) {
 			$this->logger->info( __METHOD__ . " Expected integer but got $val" );
@@ -167,7 +175,9 @@ class Validate implements LoggerAwareInterface {
 	public function validateClosed( $info, &$val, $standalone ) {
 		if ( !$standalone ) {
 			// this only validates standalone properties, not arrays, etc
+			// @codeCoverageIgnoreStart
 			return;
+			// @codeCoverageIgnoreEnd
 		}
 
 		// check if it's in a numeric range
@@ -195,7 +205,9 @@ class Validate implements LoggerAwareInterface {
 	public function validateReal( $info, &$val, $standalone ) {
 		if ( !$standalone ) {
 			// this only validates standalone properties, not arrays, etc
+			// @codeCoverageIgnoreStart
 			return;
+			// @codeCoverageIgnoreEnd
 		}
 
 		$isReal = is_numeric( $val ) && (float)$val;
@@ -265,7 +277,9 @@ class Validate implements LoggerAwareInterface {
 	public function validateLangCode( $info, &$val, $standalone ) {
 		if ( !$standalone ) {
 			// this only validates standalone properties, not arrays, etc
+			// @codeCoverageIgnoreStart
 			return;
+			// @codeCoverageIgnoreEnd
 		}
 		if ( !preg_match( '/^[-A-Za-z0-9]{2,}$/D', $val ) ) {
 			// this is a rather naive check.
@@ -294,7 +308,9 @@ class Validate implements LoggerAwareInterface {
 	public function validateDate( $info, &$val, $standalone ) {
 		if ( !$standalone ) {
 			// this only validates standalone properties, not arrays, etc
+			// @codeCoverageIgnoreStart
 			return;
+			// @codeCoverageIgnoreEnd
 		}
 		$res = [];
 		if ( !preg_match(
@@ -396,7 +412,10 @@ class Validate implements LoggerAwareInterface {
 	 */
 	public function validateGPS( $info, &$val, $standalone ) {
 		if ( !$standalone ) {
+			// this only validates standalone properties, not arrays, etc
+			// @codeCoverageIgnoreStart
 			return;
+			// @codeCoverageIgnoreEnd
 		}
 
 		$m = [];
