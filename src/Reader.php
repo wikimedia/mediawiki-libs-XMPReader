@@ -567,11 +567,13 @@ class Reader implements LoggerAwareInterface {
 
 		// For XMLReader to parse incomplete/invalid XML, it has to be open()'ed
 		// instead of using XML().
-		$reader->open(
+		if ( !$reader->open(
 			$dataUri,
 			null,
 			LIBXML_NOERROR | LIBXML_NOWARNING | LIBXML_NONET
-		);
+		) ) {
+			return false;
+		}
 
 		if ( LIBXML_VERSION < 20900 ) {
 			$oldDisable = libxml_disable_entity_loader( true );
