@@ -239,7 +239,9 @@ class Validate implements LoggerAwareInterface {
 	public function validateFlash( $info, &$val, $standalone ) {
 		if ( $standalone ) {
 			// this only validates flash structs, not individual properties
+			// @codeCoverageIgnoreStart
 			return;
+			// @codeCoverageIgnoreEnd
 		}
 		if ( !isset( $val['Fired'] ) ||
 			!isset( $val['Function'] ) ||
