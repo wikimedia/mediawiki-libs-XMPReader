@@ -175,49 +175,52 @@ class ReaderTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( $expected, $actual );
 	}
 
-	/**
-	 * Test for multi-section, hostile XML
-	 */
-	public function testCheckParseSafety() {
-		// Test for detection
-		$xmpPath = __DIR__ . '/data/';
-		$file = fopen( $xmpPath . 'doctype-included.xmp', 'rb' );
-		$valid = false;
-		$reader = new Reader();
-		do {
-			$chunk = fread( $file, 10 );
-			$valid = $reader->parse( $chunk, feof( $file ) );
-		} while ( !feof( $file ) );
-		$this->assertFalse( $valid, 'Check that doctype is detected in fragmented XML' );
-		$this->assertEquals(
-			[],
-			$reader->getResults(),
-			'Check that doctype is detected in fragmented XML'
-		);
-		fclose( $file );
-		unset( $reader );
-
-		// Test for false positives
-		$file = fopen( $xmpPath . 'doctype-not-included.xmp', 'rb' );
-		$valid = false;
-		$reader = new Reader();
-		do {
-			$chunk = fread( $file, 10 );
-			$valid = $reader->parse( $chunk, feof( $file ) );
-		} while ( !feof( $file ) );
-		$this->assertTrue(
-			$valid,
-			'Check for false-positive detecting doctype in fragmented XML'
-		);
-		$this->assertEquals(
-			[
-				'xmp-exif' => [
-					'DigitalZoomRatio' => '0/10',
-					'Flash' => '9'
+	public static function provideCheckParseSafety() {
+		return [
+			'Doctype is detected in fragmented XML' => [
+				'doctype-included.xmp',
+				false,
+				[]
+			],
+			'False-positive detecting doctype in fragmented XML' => [
+				'doctype-not-included.xmp',
+				true,
+				[
+					'xmp-exif' => [
+						'DigitalZoomRatio' => '0/10',
+						'Flash' => '9'
+					]
 				]
 			],
-			$reader->getResults(),
-			'Check that doctype is detected in fragmented XML'
-		);
+			'XML containing null bytes (T320282)' => [
+				'null-byte.xmp',
+				true,
+				[
+					'xmp-exif' => [
+						'Flash' => "9"
+					]
+				]
+			]
+		];
+	}
+
+	/**
+	 * Test for multi-section, hostile XML
+	 * @dataProvider provideCheckParseSafety
+	 */
+	public function testCheckParseSafety( $fileName, $expectValid, $expectResults ) {
+		// Test for detection
+		$xmpPath = __DIR__ . '/data/';
+		$file = fopen( $xmpPath . $fileName, 'rb' );
+		$valid = false;
+		$reader = new Reader();
+		do {
+			$chunk = fread( $file, 10 );
+			$chunk = str_replace( '~', "\0", $chunk );
+			$valid = $reader->parse( $chunk, feof( $file ) );
+		} while ( !feof( $file ) );
+		$this->assertSame( $expectValid, $valid );
+		$this->assertEquals( $expectResults, $reader->getResults() );
+		fclose( $file );
 	}
 }
