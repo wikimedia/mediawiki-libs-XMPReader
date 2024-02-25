@@ -29,7 +29,6 @@ use Psr\Log\LoggerAwareTrait;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use RuntimeException;
-use Wikimedia\AtEase\AtEase;
 use Wikimedia\ScopedCallback;
 use XMLReader;
 
@@ -351,9 +350,8 @@ class Reader implements LoggerAwareInterface {
 			}
 			if ( $this->charset !== 'UTF-8' ) {
 				// don't convert if already utf-8
-				AtEase::suppressWarnings();
-				$content = iconv( $this->charset, 'UTF-8//IGNORE', $content );
-				AtEase::restoreWarnings();
+				// phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged
+				$content = @iconv( $this->charset, 'UTF-8//IGNORE', $content );
 			}
 
 			// Replace any null bytes with the replacement character (T320282)
@@ -592,8 +590,8 @@ class Reader implements LoggerAwareInterface {
 
 		// Even with LIBXML_NOWARNING set, XMLReader::read gives a warning
 		// when parsing truncated XML, which causes unit tests to fail.
-		AtEase::suppressWarnings();
-		while ( $reader->read() ) {
+		// phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged
+		while ( @$reader->read() ) {
 			if ( $reader->nodeType === XMLReader::ELEMENT ) {
 				// Reached the first element without hitting a doctype declaration
 				$this->parsable = self::PARSABLE_OK;
@@ -606,7 +604,6 @@ class Reader implements LoggerAwareInterface {
 				break;
 			}
 		}
-		AtEase::restoreWarnings();
 
 		if ( $result !== null ) {
 			return $result;
