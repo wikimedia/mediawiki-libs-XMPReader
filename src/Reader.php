@@ -401,7 +401,8 @@ class Reader implements LoggerAwareInterface {
 						'column' => $col,
 						'offset' => $offset,
 						'content' => $content,
-				] );
+					]
+				);
 				// blank if error.
 				$this->results = [];
 				$this->destroyXMLParser();
