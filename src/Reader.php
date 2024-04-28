@@ -299,14 +299,13 @@ class Reader implements LoggerAwareInterface {
 	}
 
 	/**
-	 * Main function to call to parse XMP. Use getResults to
-	 * get results.
+	 * Main function to parse XMP. Use getResults to get results.
 	 *
 	 * Also catches any errors during processing, writes them to
 	 * debug log, blanks result array and returns false.
 	 *
 	 * @param string $content XMP data
-	 * @param bool $allOfIt If this is all the data (true) or if it's split up (false). Default true
+	 * @param bool $allOfIt If this is all the data (true), or if it's split up (false). Default true
 	 * @throws RuntimeException
 	 * @return bool Success.
 	 */

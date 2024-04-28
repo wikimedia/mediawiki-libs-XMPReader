@@ -2,6 +2,7 @@
 
 namespace Wikimedia\XMPReader\Test;
 
+use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
 use Wikimedia\XMPReader\Validate;
 
@@ -10,7 +11,7 @@ use Wikimedia\XMPReader\Validate;
  *
  * @covers \Wikimedia\XMPReader\Validate
  */
-class ValidateTest extends \PHPUnit\Framework\TestCase {
+class ValidateTest extends TestCase {
 
 	/**
 	 * @dataProvider provideBoolean

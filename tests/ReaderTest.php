@@ -2,13 +2,15 @@
 
 namespace Wikimedia\XMPReader\Test;
 
+use Exception;
+use PHPUnit\Framework\TestCase;
 use Wikimedia\XMPReader\Reader;
 
 /**
  * @group Media
  * @covers \Wikimedia\XMPReader\Reader
  */
-class ReaderTest extends \PHPUnit\Framework\TestCase {
+class ReaderTest extends TestCase {
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -25,12 +27,12 @@ class ReaderTest extends \PHPUnit\Framework\TestCase {
 	 * @param array $expected Expected result of parsing the xmp.
 	 * @param string $info Short sentence on what's being tested.
 	 *
-	 * @throws \Exception
+	 * @throws Exception
 	 * @dataProvider provideXMPParse
 	 */
 	public function testXMPParse( $xmp, $expected, $info ) {
 		if ( !is_string( $xmp ) || !is_array( $expected ) ) {
-			throw new \Exception( "Invalid data provided to " . __METHOD__ );
+			throw new Exception( "Invalid data provided to " . __METHOD__ );
 		}
 		$reader = new Reader;
 		$reader->parse( $xmp );
@@ -44,7 +46,7 @@ class ReaderTest extends \PHPUnit\Framework\TestCase {
 		// $xmpFiles format: array of arrays with first arg file base name,
 		// with the actual file having .xmp on the end for the xmp
 		// and .result.php on the end for a php file containing the result
-		// array. Second argument is some info on what's being tested.
+		// array. The second argument is some info on what's being tested.
 		$xmpFiles = [
 			[ '1', 'parseType=Resource test' ],
 			[ '2', 'Structure with mixed attribute and element props' ],
@@ -86,7 +88,7 @@ class ReaderTest extends \PHPUnit\Framework\TestCase {
 	 * over multiple jpeg segments, due to 64k size limit on jpeg segments.
 	 *
 	 * @todo This is based on what the standard says. Need to find a real
-	 * world example file to double check the support for this is right.
+	 * world example file to double-check the support for this is right.
 	 */
 	public function testExtendedXMP() {
 		$xmpPath = __DIR__ . '/data/';
@@ -124,7 +126,7 @@ class ReaderTest extends \PHPUnit\Framework\TestCase {
 		$standardXMP = file_get_contents( $xmpPath . 'xmpExt.xmp' );
 		$extendedXMP = file_get_contents( $xmpPath . 'xmpExt2.xmp' );
 
-		// Note last digit is wrong (proper hash is 28C74E0AC2D796886759006FBE2E57B7)
+		// Note that the last digit is wrong (proper hash is 28C74E0AC2D796886759006FBE2E57B7)
 		$md5sum = '28C74E0AC2D796886759006FBE2E57B9';
 		$length = pack( 'N', strlen( $extendedXMP ) );
 		$offset = pack( 'N', 0 );
