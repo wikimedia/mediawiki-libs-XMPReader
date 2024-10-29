@@ -225,4 +225,8 @@ class ReaderTest extends TestCase {
 		$this->assertEquals( $expectResults, $reader->getResults() );
 		fclose( $file );
 	}
+
+	public function testIsSupported() {
+		$this->assertTrue( Reader::isSupported() );
+	}
 }
