@@ -712,7 +712,7 @@ class Reader implements LoggerAwareInterface {
 				);
 			} elseif ( is_callable( $validate ) ) {
 				$val =& $this->results['xmp-' . $info['map_group']][$finalName];
-				call_user_func_array( $validate, [ $info, &$val, false ] );
+				$validate( $info, $val, false );
 				if ( $val === null ) {
 					// the idea being the validation function will unset the variable if
 					// its invalid.
@@ -1419,7 +1419,7 @@ class Reader implements LoggerAwareInterface {
 			}
 
 			if ( is_callable( $validate ) ) {
-				call_user_func_array( $validate, [ $info, &$val, true ] );
+				$validate( $info, $val, true );
 				// the reasoning behind using &$val instead of using the return value
 				// is to be consistent between here and validating structures.
 				if ( $val === null ) {
