@@ -175,7 +175,7 @@ class ValidateTest extends TestCase {
 		$this->assertEquals( $expected, $value );
 	}
 
-	public function provideClosedOptions() {
+	public static function provideClosedOptions() {
 		return [
 			[ [], '', null ],
 			[ [], '6', null ],
@@ -200,7 +200,7 @@ class ValidateTest extends TestCase {
 		$this->assertEquals( $expected, $value );
 	}
 
-	public function provideRangesForReal() {
+	public static function provideRangesForReal() {
 		return [
 			[ [], '', null ],
 			[ [], 'null', null ],
