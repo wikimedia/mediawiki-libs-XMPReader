@@ -22,7 +22,7 @@
 		}
 	},
 	"require": {
-		"php": ">=7.4.3",
+		"php": ">=8.1",
 		"ext-iconv": "*",
 		"ext-libxml": "*",
 		"ext-xml": "*",
