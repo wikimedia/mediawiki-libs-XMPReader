@@ -226,16 +226,16 @@ class Reader implements LoggerAwareInterface {
 
 		if ( isset( $data['xmp-special']['AuthorsPosition'] )
 			&& is_string( $data['xmp-special']['AuthorsPosition'] )
-			&& isset( $data['xmp-general']['Artist'][0] )
+			&& isset( $data['xmp-general']['Artist'] )
 		) {
-			// Note, if there is more than one creator,
-			// this only applies to first. This also will
-			// only apply to the dc:Creator prop, not the
-			// exif:Artist prop.
-
-			$data['xmp-general']['Artist'][0] =
-				$data['xmp-special']['AuthorsPosition'] . ', '
-				. $data['xmp-general']['Artist'][0];
+			if ( is_string( $data['xmp-general']['Artist'] ) ) {
+				$data['xmp-general']['Artist'] = $data['xmp-special']['AuthorsPosition'] . ', '
+					. $data['xmp-general']['Artist'];
+			} elseif ( isset( $data['xmp-general']['Artist'][0] ) ) {
+				// Note, if there is more than one creator, this only applies to first.
+				$data['xmp-general']['Artist'][0] = $data['xmp-special']['AuthorsPosition'] . ', '
+					. $data['xmp-general']['Artist'][0];
+			}
 		}
 
 		// Go through the LocationShown and LocationCreated
