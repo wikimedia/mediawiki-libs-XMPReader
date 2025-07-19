@@ -842,7 +842,7 @@ class Reader implements LoggerAwareInterface {
 			);
 		}
 
-		if ( strpos( $elm, ' ' ) === false ) {
+		if ( !str_contains( $elm, ' ' ) ) {
 			// This probably shouldn't happen.
 			// However, there is a bug in an adobe product
 			// that forgets the namespace on some things.
@@ -1281,7 +1281,7 @@ class Reader implements LoggerAwareInterface {
 			);
 		}
 
-		if ( strpos( $elm, ' ' ) === false ) {
+		if ( !str_contains( $elm, ' ' ) ) {
 			// This probably shouldn't happen.
 			$this->logger->info(
 				__METHOD__ . " Encountered <$elm> which has no namespace. Skipping.",
@@ -1364,7 +1364,7 @@ class Reader implements LoggerAwareInterface {
 			$this->mode[0] = self::MODE_QDESC;
 		}
 		foreach ( $attribs as $name => $val ) {
-			if ( strpos( $name, ' ' ) === false ) {
+			if ( !str_contains( $name, ' ' ) ) {
 				// This shouldn't happen, but so far some old software forgets namespace
 				// on rdf:about.
 				$this->logger->info(
