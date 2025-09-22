@@ -29,7 +29,7 @@
 		"ext-xmlreader": "*",
 		"psr/log": "^1.0",
 		"wikimedia/scoped-callback": "^1.0 || ^2.0 || ^3.0 || ^4.0 || ^5.0",
-		"wikimedia/timestamp": "^1.0 || ^2.0 || ^3.0 || ^4.0"
+		"wikimedia/timestamp": "^1.0 || ^2.0 || ^3.0 || ^4.0 || ^5.0"
 	},
 	"require-dev": {
 		"ext-exif": "*",
