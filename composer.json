@@ -42,6 +42,7 @@
 		"phpunit/phpunit": "9.6.21"
 	},
 	"scripts": {
+		"changelog": "git log HEAD --format=\"* %s (%aN)\" --no-merges --not --tags | sort | grep -vE \"^\\* (build|docs?|tests?):\"",
 		"test": [
 			"parallel-lint . --exclude vendor",
 			"@phpunit",
