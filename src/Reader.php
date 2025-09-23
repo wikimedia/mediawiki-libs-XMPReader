@@ -804,7 +804,7 @@ class Reader implements LoggerAwareInterface {
 		if ( $elm === self::NS_RDF . ' value' ) {
 			[ $ns, $tag ] = explode( ' ', $this->curItem[0], 2 );
 			$this->saveValue( $ns, $tag, $this->charContent );
-
+			$this->charContent = false;
 			return;
 		}
 
@@ -1041,9 +1041,14 @@ class Reader implements LoggerAwareInterface {
 	 * Called when processing the <rdf:value> or <foo:someQualifier>.
 	 *
 	 * @param string $elm Namespace and tag name separated by a space.
+	 * @param array $attribs Array of attributes
 	 */
-	private function startElementModeQDesc( $elm ): void {
+	private function startElementModeQDesc( $elm, $attribs ): void {
 		if ( $elm === self::NS_RDF . ' value' ) {
+			// URL values use rdf:resource attribute instead of text content.
+			if ( isset( $attribs[ self::NS_RDF . ' resource' ] ) ) {
+				$this->char( $this->xmlParser, $attribs[ self::NS_RDF . ' resource' ] );
+			}
 			// do nothing
 			return;
 		}
@@ -1330,7 +1335,7 @@ class Reader implements LoggerAwareInterface {
 				$this->startElementModeLi( $elm, $attribs );
 				break;
 			case self::MODE_QDESC:
-				$this->startElementModeQDesc( $elm );
+				$this->startElementModeQDesc( $elm, $attribs );
 				break;
 			default:
 				throw new RuntimeException( 'StartElement in unknown mode: ' . $this->mode[0] );

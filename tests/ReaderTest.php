@@ -68,6 +68,7 @@ class ReaderTest extends TestCase {
 			[ 'utf32LE', 'UTF-32LE encoding' ],
 			[ 'xmpExt', 'Extended XMP missing second part' ],
 			[ 'gps', 'Handling of exif GPS parameters in XMP' ],
+			[ 'url', 'Handling of rdf:resource attribute' ],
 		];
 
 		$xmpFiles[] = [ 'doctype-included', 'XMP includes doctype' ];

@@ -1,0 +1,18 @@
+<!-- See https://raw.githubusercontent.com/adobe/XMP-Toolkit-SDK/refs/heads/main/docs/XMPSpecificationPart1.pdf#page=22 -->
+<rdf:RDF xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'>
+	<rdf:Description rdf:about='' xmlns:cc="http://creativecommons.org/ns#">
+		<cc:license rdf:resource="https://creativecommons.org/licenses/by/4.0/"/>
+		<cc:morePermissions>
+			<rdf:Description>
+				<rdf:value rdf:resource="https://example.com/morePerms"/>
+				<cc:UnknownQualifier>ignored</cc:UnknownQualifier>
+			</rdf:Description>
+		</cc:morePermissions>
+		<cc:attributionURL rdf:parseType="Resource">
+			<rdf:value rdf:resource="https://example.com/attribution"/>
+		</cc:attributionURL>
+		<cc:attributionName rdf:parseType="Resource"><rdf:value>Name</rdf:value></cc:attributionName>
+		<Instructions xmlns="http://ns.adobe.com/photoshop/1.0/">Plain value</Instructions>
+	</rdf:Description>
+</rdf:RDF>
+
