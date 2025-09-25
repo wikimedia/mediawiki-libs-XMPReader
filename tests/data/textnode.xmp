@@ -1,0 +1,6 @@
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+xmlns:e="http://ns.adobe.com/tiff/1.0/">
+<rdf:Description>
+<e:Artist>A<!-- split the text node -->li<![CDATA[ce]]></e:Artist>
+</rdf:Description>
+</rdf:RDF>

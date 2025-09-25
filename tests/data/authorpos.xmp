@@ -1,0 +1,7 @@
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+xmlns:e="http://ns.adobe.com/tiff/1.0/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:p="http://ns.adobe.com/photoshop/1.0/">
+<rdf:Description p:AuthorsPosition="Photographer">
+<!-- It looks like the special handling only applies to dc:creator not exif:Artist -->
+<dc:creator><rdf:Seq><rdf:li>Bob</rdf:li><rdf:li>Alice</rdf:li></rdf:Seq></dc:creator>
+</rdf:Description>
+</rdf:RDF>

@@ -69,6 +69,13 @@ class ReaderTest extends TestCase {
 			[ 'xmpExt', 'Extended XMP missing second part' ],
 			[ 'gps', 'Handling of exif GPS parameters in XMP' ],
 			[ 'url', 'Handling of rdf:resource attribute' ],
+			[ 'extra-xml', 'Ignores extra non-namespaced XML' ],
+			[ 'seq', 'Test parsing of ordered lists' ],
+			[ 'ignore', 'Test handling unrecognized tags' ],
+			[ 'bagstruct', 'Test bag structs' ],
+			[ 'bagstruct2', 'Test bag structs with inner desc' ],
+			[ 'authorpos', 'Author position' ],
+			[ 'textnode', 'multiple text nodes' ],
 		];
 
 		$xmpFiles[] = [ 'doctype-included', 'XMP includes doctype' ];

@@ -1,0 +1,33 @@
+<!-- Verify random tags are ignored -->
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+xmlns:e="http://ns.adobe.com/tiff/1.0/" xmlns:unrecognized="https://example.com/unknown/">
+	<rdf:Description>
+		<e:Artist>
+			<rdf:Description>
+				<rdf:value>Bob</rdf:value>
+				<unrecognized:foo>
+					<unrecognized:bar>
+						<unrecognized:foo>
+							<unrecognized:bar>value to ignore</unrecognized:bar>
+						</unrecognized:foo>
+					</unrecognized:bar>
+				</unrecognized:foo>
+			</rdf:Description>
+		</e:Artist>
+		<unrecognized:baz>
+			<unrecognized:baz>
+				Text
+			</unrecognized:baz>
+		</unrecognized:baz>
+		<Flash xmlns="http://ns.adobe.com/exif/1.0/" rdf:parseType="Resource">
+			<Invalid>This should be ignored</Invalid>
+			<Return>0</Return>
+			<Mode>1</Mode>
+			<Function>False</Function>
+			<RedEyeMode>False</RedEyeMode>
+			<Fired>True</Fired>
+		</Flash>
+		<e:Model><unrecognized:foo>This should be ignored</unrecognized:foo></e:Model>
+		<e:Make>Camera company</e:Make>
+	</rdf:Description>
+</rdf:RDF>

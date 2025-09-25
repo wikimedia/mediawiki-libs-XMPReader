@@ -229,6 +229,8 @@ class Reader implements LoggerAwareInterface {
 			&& isset( $data['xmp-general']['Artist'] )
 		) {
 			if ( is_string( $data['xmp-general']['Artist'] ) ) {
+				// Not clear if this is reachable, as simple value Artist
+				// should always be xmp-general not xmp-exif
 				$data['xmp-general']['Artist'] = $data['xmp-special']['AuthorsPosition'] . ', '
 					. $data['xmp-general']['Artist'];
 			} elseif ( isset( $data['xmp-general']['Artist'][0] ) ) {
