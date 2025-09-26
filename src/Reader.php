@@ -981,7 +981,7 @@ class Reader implements LoggerAwareInterface {
 		if ( $elm === self::NS_RDF . ' Alt' ) {
 			array_unshift( $this->mode, self::MODE_LI_LANG );
 		} else {
-			throw new RuntimeException( "Expected <rdf:Seq> but got $elm." );
+			throw new RuntimeException( "Expected <rdf:Alt> but got $elm." );
 		}
 	}
 
@@ -1100,6 +1100,8 @@ class Reader implements LoggerAwareInterface {
 				if ( $this->charContent !== false ) {
 					// Something weird.
 					// Should not happen in valid XMP.
+					// char() should also throw an exception before
+					// we hit this.
 					throw new RuntimeException( 'tag nested in non-whitespace characters.' );
 				}
 			} else {
@@ -1377,7 +1379,7 @@ class Reader implements LoggerAwareInterface {
 				// on rdf:about.
 				$this->logger->info(
 					__METHOD__ . ' Encountered non-namespaced attribute: ' .
-					" $name=\"$val\". Skipping. ",
+					" $name=\"$val\". Skipping.",
 					[ 'file' => $this->filename ]
 				);
 				continue;

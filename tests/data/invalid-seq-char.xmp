@@ -1,0 +1,10 @@
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+xmlns:dc="http://purl.org/dc/elements/1.1/">
+	<rdf:Description>
+		<dc:date>
+			<rdf:Seq>
+				2020-04-12T15:32:01Z
+			</rdf:Seq>
+		</dc:date>
+	</rdf:Description>
+</rdf:RDF>

@@ -49,4 +49,7 @@ return [
 	[
 		'Identifier' => 'http://example.com/identifierurl/wrong',
 	],
+	'logs' => [
+		'Wikimedia\XMPReader\Validate::validateRating Rating too high, setting to 5'
+	]
 ];

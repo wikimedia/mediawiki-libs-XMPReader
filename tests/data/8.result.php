@@ -24,5 +24,21 @@ return [
 	],
 	'xmp-deprecated' => [
 		'DateTimeOriginal' => '2018:08:16 16:37:38',
+	],
+	'logs' => [
+		'Wikimedia\XMPReader\Reader::doAttribs Ignoring unrecognized element' .
+			' <http://ns.adobe.com/xap/1.0/mm/:DocumentID>.',
+		'Wikimedia\XMPReader\Reader::doAttribs Ignoring unrecognized element' .
+			' <http://ns.adobe.com/xap/1.0/mm/:InstanceID>.',
+		'Wikimedia\XMPReader\Reader::doAttribs Ignoring unrecognized element' .
+			' <http://ns.adobe.com/photoshop/1.0/:ICCProfile>.',
+		'Wikimedia\XMPReader\Reader::doAttribs Ignoring unrecognized element' .
+			' <http://ns.adobe.com/photoshop/1.0/:LegacyIPTCDigest>.',
+		'Wikimedia\XMPReader\Reader::doAttribs Ignoring unrecognized element' .
+			' <http://ns.adobe.com/photoshop/1.0/:ColorMode>.',
+		'Wikimedia\XMPReader\Reader::doAttribs Ignoring unrecognized element' .
+			' <http://purl.org/dc/elements/1.1/:format>.',
+		'Wikimedia\XMPReader\Reader::startElementModeInitial Ignoring unrecognized element <{element}>.',
+		'Wikimedia\XMPReader\Reader::startElementModeInitial Ignoring unrecognized element <{element}>.',
 	]
 ];

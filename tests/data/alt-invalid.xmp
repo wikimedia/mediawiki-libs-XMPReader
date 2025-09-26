@@ -1,0 +1,11 @@
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+xmlns:dc="http://purl.org/dc/elements/1.1/">
+	<rdf:Description>
+		<dc:title>
+			<rdf:Random>
+				<rdf:li xml:lang="x-default">Foo</rdf:li>
+				<rdf:li xml:lang="en-CA">Bar</rdf:li>
+			</rdf:Random>
+		</dc:title>
+	</rdf:Description>
+</rdf:RDF>

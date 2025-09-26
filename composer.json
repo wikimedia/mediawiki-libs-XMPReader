@@ -5,10 +5,7 @@
 	"homepage": "https://www.mediawiki.org/wiki/XMPReader",
 	"keywords": [
 		"xmp",
-		"exif",
-		"iptc",
-		"metadata",
-		"parse"
+		"metadata"
 	],
 	"authors": [
 		{
@@ -32,14 +29,14 @@
 		"wikimedia/timestamp": "^1.0 || ^2.0 || ^3.0 || ^4.0 || ^5.0"
 	},
 	"require-dev": {
-		"ext-exif": "*",
 		"mediawiki/mediawiki-codesniffer": "48.0.0",
 		"mediawiki/mediawiki-phan-config": "0.17.0",
 		"mediawiki/minus-x": "1.1.3",
 		"ockcyp/covers-validator": "1.6.0",
 		"php-parallel-lint/php-console-highlighter": "1.0.0",
 		"php-parallel-lint/php-parallel-lint": "1.4.0",
-		"phpunit/phpunit": "9.6.21"
+		"phpunit/phpunit": "9.6.21",
+		"colinodell/psr-testlogger": "1.3.0"
 	},
 	"scripts": {
 		"changelog": "git log HEAD --format=\"* %s (%aN)\" --no-merges --not --tags | sort | grep -vE \"^\\* (build|docs?|tests?):\"",

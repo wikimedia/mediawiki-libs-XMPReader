@@ -2,6 +2,7 @@
 
 namespace Wikimedia\XMPReader\Test;
 
+use ColinODell\PsrTestLogger\TestLogger;
 use Exception;
 use PHPUnit\Framework\TestCase;
 use Wikimedia\XMPReader\Reader;
@@ -15,8 +16,8 @@ class ReaderTest extends TestCase {
 	protected function setUp(): void {
 		parent::setUp();
 		# Requires libxml to do XMP parsing
-		if ( !extension_loaded( 'exif' ) ) {
-			$this->markTestSkipped( "PHP extension 'exif' is not loaded, skipping." );
+		if ( !extension_loaded( 'xml' ) ) {
+			$this->markTestSkipped( "PHP extension 'xml' is not loaded, skipping." );
 		}
 	}
 
@@ -34,9 +35,22 @@ class ReaderTest extends TestCase {
 		if ( !is_string( $xmp ) || !is_array( $expected ) ) {
 			throw new Exception( "Invalid data provided to " . __METHOD__ );
 		}
-		$reader = new Reader;
+		$logs = $expected['logs'] ?? [];
+		unset( $expected['logs'] );
+		$logger = new TestLogger;
+		$reader = new Reader( $logger );
 		$reader->parse( $xmp );
+
 		$this->assertEqualsWithDelta( $expected, $reader->getResults(), 0.0000000001, $info );
+		$this->assertSameSize(
+			$logs,
+			$logger->records,
+			"Expected number of debug logs mismatch for $info. Got: " .
+				print_r( $logger->records, true )
+		);
+		foreach ( $logs as $logRecord ) {
+			$this->assertTrue( $logger->hasRecord( $logRecord ), "Expected $info to have log entry '$logRecord'" );
+		}
 	}
 
 	public static function provideXMPParse() {
@@ -76,6 +90,22 @@ class ReaderTest extends TestCase {
 			[ 'bagstruct2', 'Test bag structs with inner desc' ],
 			[ 'authorpos', 'Author position' ],
 			[ 'textnode', 'multiple text nodes' ],
+			[ 'notxmp', 'Not an xml file' ],
+			[ 'invalidxml', 'Invalid xml' ],
+			[ 'invalid-seq-char', 'Char data in seq' ],
+			[ 'badstruct', 'structure where all elms fail' ],
+			[ 'badstruct2', 'invalid structure' ],
+			[ 'seq-empty', 'Empty seq' ],
+			[ 'seq-invalid', 'Invalid seq' ],
+			[ 'seq-invalid2', 'Invalid seq 2' ],
+			[ 'bag-invalid', 'Invalid bag' ],
+			[ 'alt-invalid', 'Invalid alt' ],
+			[ 'alt-invalid2', 'Invalid alt' ],
+			[ 'alt-invalid3', 'Invalid alt' ],
+			[ 'value-invalid', 'Invalid value' ],
+			[ 'char-invalid', 'Invalid characters inside description' ],
+			[ 'badattribs', 'Not allowed attribute' ],
+			[ 'earlychar', 'Characters before rdf:Description' ],
 		];
 
 		$xmpFiles[] = [ 'doctype-included', 'XMP includes doctype' ];
@@ -119,6 +149,34 @@ class ReaderTest extends TestCase {
 				'DigitalZoomRatio' => '0/10',
 				'Flash' => 9,
 				'FNumber' => '2/10',
+			]
+		];
+
+		$this->assertEquals( $expected, $actual );
+	}
+
+	public function testExtendedXMPWrongOffset() {
+		// We don't support misordered extended XMP, so this should ignore the second part
+		$xmpPath = __DIR__ . '/data/';
+		$standardXMP = file_get_contents( $xmpPath . 'xmpExt.xmp' );
+		$extendedXMP = file_get_contents( $xmpPath . 'xmpExt2.xmp' );
+
+		// md5sum of xmpExt2.xmp
+		$md5sum = '28C74E0AC2D796886759006FBE2E57B7';
+		$length = pack( 'N', strlen( $extendedXMP ) + 1000 );
+		$offset = pack( 'N', 1000 );
+		$extendedPacket = $md5sum . $length . $offset . $extendedXMP;
+
+		$reader = new Reader();
+		$reader->parse( $standardXMP );
+		$extResult = $reader->parseExtended( $extendedPacket );
+		$this->assertFalse( $extResult );
+		$actual = $reader->getResults();
+
+		$expected = [
+			'xmp-exif' => [
+				'DigitalZoomRatio' => '0/10',
+				'Flash' => 9,
 			]
 		];
 
@@ -236,5 +294,27 @@ class ReaderTest extends TestCase {
 
 	public function testIsSupported() {
 		$this->assertTrue( Reader::isSupported() );
+	}
+
+	public function testMultipleXMP() {
+		// This is testing multiple separate XMP files not multiple chunks.
+		$log = new TestLogger;
+		$reader = new Reader( $log );
+		$xmp1 = '<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"'
+			. ' xmlns:t="http://ns.adobe.com/tiff/1.0/">'
+			. '<rdf:Description t:Artist="Claude Monet"/></rdf:RDF>';
+
+		$xmp2 = '<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"'
+			. ' xmlns:t2="http://ns.adobe.com/tiff/1.0/">'
+			. '<rdf:Description t2:Model="SuperScanner"/></rdf:RDF>';
+
+		$reader->parse( $xmp1 );
+		$reader->parse( $xmp2 );
+		$this->assertEquals( [
+			'xmp-exif' => [
+				'Artist' => 'Claude Monet',
+				'Model' => 'SuperScanner'
+			]
+		], $reader->getResults(), print_r( $log->records, true ) );
 	}
 }
