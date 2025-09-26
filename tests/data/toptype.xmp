@@ -1,0 +1,10 @@
+<!-- Verify we ignore top level rdf:type.
+     Note, we currently do not properly support rdf:type in struct fields.
+ -->
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+xmlns:e="http://ns.adobe.com/tiff/1.0/">
+<rdf:Description>
+  <rdf:type rdf:resource="http://creativecommons.org/ns#work"/>
+  <e:Artist>Bob</e:Artist>
+</rdf:Description>
+</rdf:RDF>

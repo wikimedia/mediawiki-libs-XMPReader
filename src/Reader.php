@@ -1073,6 +1073,12 @@ class Reader implements LoggerAwareInterface {
 	 * @throws RuntimeException
 	 */
 	private function startElementModeInitial( $ns, $tag, $attribs ): void {
+		if ( $ns === self::NS_RDF && $tag === 'type' ) {
+			// Ignore top level rdf:type. See XMP spec part 1 section 7.9.2.5.
+			array_unshift( $this->mode, self::MODE_IGNORE );
+			array_unshift( $this->curItem, $ns . ' ' . $tag );
+			return;
+		}
 		if ( $ns !== self::NS_RDF ) {
 			if ( isset( $this->items[$ns][$tag] ) ) {
 				if ( isset( $this->items[$ns][$tag]['structPart'] ) ) {

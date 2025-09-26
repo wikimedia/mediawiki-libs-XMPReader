@@ -106,6 +106,7 @@ class ReaderTest extends TestCase {
 			[ 'char-invalid', 'Invalid characters inside description' ],
 			[ 'badattribs', 'Not allowed attribute' ],
 			[ 'earlychar', 'Characters before rdf:Description' ],
+			[ 'toptype', 'Top level rdf:type' ],
 		];
 
 		$xmpFiles[] = [ 'doctype-included', 'XMP includes doctype' ];
