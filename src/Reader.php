@@ -700,12 +700,8 @@ class Reader implements LoggerAwareInterface {
 			$info =& $this->items[$ns][$tag];
 			$finalName = $info['map_name'] ?? $tag;
 
-			if ( is_array( $info['validate'] ) ) {
-				$validate = $info['validate'];
-			} else {
-				$validator = new Validate( $this->logger );
-				$validate = [ $validator, $info['validate'] ];
-			}
+			$validator = new Validate( $this->logger );
+			$validate = [ $validator, $info['validate'] ];
 
 			if ( !isset( $this->results['xmp-' . $info['map_group']][$finalName] ) ) {
 				// This can happen if all the members of the struct failed validation.
@@ -713,7 +709,7 @@ class Reader implements LoggerAwareInterface {
 					__METHOD__ . " <$ns:$tag> has no valid members.",
 					[ 'file' => $this->filename ]
 				);
-			} elseif ( is_callable( $validate ) ) {
+			} else {
 				$val =& $this->results['xmp-' . $info['map_group']][$finalName];
 				$validate( $info, $val, false );
 				if ( $val === null ) {
@@ -725,12 +721,6 @@ class Reader implements LoggerAwareInterface {
 					);
 					unset( $this->results['xmp-' . $info['map_group']][$finalName] );
 				}
-			} else {
-				$this->logger->warning(
-					__METHOD__ . " Validation function for $finalName (" .
-					get_class( $validate[0] ) . '::' . $validate[1] . '()) is not callable.',
-					[ 'file' => $this->filename ]
-				);
 			}
 		}
 
@@ -1427,31 +1417,19 @@ class Reader implements LoggerAwareInterface {
 		$info =& $this->items[$ns][$tag];
 		$finalName = $info['map_name'] ?? $tag;
 		if ( isset( $info['validate'] ) ) {
-			if ( is_array( $info['validate'] ) ) {
-				$validate = $info['validate'];
-			} else {
-				$validator = new Validate( $this->logger );
-				$validate = [ $validator, $info['validate'] ];
-			}
+			$validator = new Validate( $this->logger );
+			$validate = [ $validator, $info['validate'] ];
 
-			if ( is_callable( $validate ) ) {
-				$validate( $info, $val, true );
-				// the reasoning behind using &$val instead of using the return value
-				// is to be consistent between here and validating structures.
-				if ( $val === null ) {
-					$this->logger->info(
-						__METHOD__ . " <$ns:$tag> failed validation.",
-						[ 'file' => $this->filename ]
-					);
-
-					return;
-				}
-			} else {
-				$this->logger->warning(
-					__METHOD__ . " Validation function for $finalName (" .
-					get_class( $validate[0] ) . '::' . $validate[1] . '()) is not callable.',
+			$validate( $info, $val, true );
+			// the reasoning behind using &$val instead of using the return value
+			// is to be consistent between here and validating structures.
+			if ( $val === null ) {
+				$this->logger->info(
+					__METHOD__ . " <$ns:$tag> failed validation.",
 					[ 'file' => $this->filename ]
 				);
+
+				return;
 			}
 		}
 
