@@ -580,13 +580,20 @@ class Reader implements LoggerAwareInterface {
 			return false;
 		}
 
+		// 2.9.0 released Feb 2022 - https://gitlab.gnome.org/GNOME/libxml2/-/releases/v2.9.0
+		// https://www.php.net/manual/en/libxml.requirements.php
+		// > This extension requires » libxml >= 2.9.4 as of PHP 8.4.0, libxml >= 2.9.0
+		// > prior to PHP 8.4.0, and libxml >= 2.6.0 prior to PHP 8.0.0.
+		// So this can probably be removed when we require PHP >= 8.4.0!
 		if ( LIBXML_VERSION < 20900 ) {
+			// @codeCoverageIgnoreStart
 			$oldDisable = libxml_disable_entity_loader( true );
 			/** @noinspection PhpUnusedLocalVariableInspection */
 			$reset = new ScopedCallback(
 				'libxml_disable_entity_loader',
 				[ $oldDisable ]
 			);
+			// @codeCoverageIgnoreEnd
 		}
 
 		$reader->setParserProperty( XMLReader::SUBST_ENTITIES, false );
