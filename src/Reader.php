@@ -858,13 +858,17 @@ class Reader implements LoggerAwareInterface {
 		if ( count( $this->mode ) === 0 ) {
 			// This should never ever happen and means
 			// there is a pretty major bug in this class.
+			// @codeCoverageIgnoreStart
 			throw new RuntimeException( 'Encountered end element with no mode' );
+			// @codeCoverageIgnoreEnd
 		}
 
 		if ( count( $this->curItem ) === 0 && $this->mode[0] !== self::MODE_INITIAL ) {
 			// just to be paranoid. Should always have a curItem, except for initially
 			// (aka during MODE_INITIAL).
+			// @codeCoverageIgnoreStart
 			throw new RuntimeException( "Hit end element </$elm> but no curItem" );
+			// @codeCoverageIgnoreEnd
 		}
 
 		switch ( $this->mode[0] ) {
@@ -885,7 +889,9 @@ class Reader implements LoggerAwareInterface {
 				if ( $elm === self::NS_RDF . ' Description' ) {
 					array_shift( $this->mode );
 				} else {
+					// @codeCoverageIgnoreStart
 					throw new RuntimeException( 'Element ended unexpectedly while in MODE_INITIAL' );
+					// @codeCoverageIgnoreEnd
 				}
 				break;
 			case self::MODE_LI:
@@ -896,11 +902,13 @@ class Reader implements LoggerAwareInterface {
 				$this->endElementModeQDesc( $elm );
 				break;
 			default:
+				// @codeCoverageIgnoreStart
 				$this->logger->info(
 					__METHOD__ . " no mode (elm = $elm)",
 					[ 'file' => $this->filename ]
 				);
 				break;
+				// @codeCoverageIgnoreEnd
 		}
 	}
 
@@ -1195,7 +1203,9 @@ class Reader implements LoggerAwareInterface {
 		if ( !isset( $this->mode[1] ) ) {
 			// This should never ever ever happen. Checking for it
 			// to be paranoid.
+			// @codeCoverageIgnoreStart
 			throw new RuntimeException( 'In mode Li, but no 2xPrevious mode!' );
+			// @codeCoverageIgnoreEnd
 		}
 
 		if ( $this->mode[1] === self::MODE_BAGSTRUCT ) {
@@ -1206,7 +1216,9 @@ class Reader implements LoggerAwareInterface {
 
 			if ( !isset( $this->curItem[1] ) ) {
 				// be paranoid.
+				// @codeCoverageIgnoreStart
 				throw new RuntimeException( 'Can not find parent of BAGSTRUCT.' );
+				// @codeCoverageIgnoreEnd
 			}
 			[ $curNS, $curTag ] = explode( ' ', $this->curItem[1] );
 			$this->ancestorStruct = $this->items[$curNS][$curTag]['map_name'] ?? $curTag;
@@ -1308,8 +1320,10 @@ class Reader implements LoggerAwareInterface {
 
 		if ( count( $this->mode ) === 0 ) {
 			// This should not happen.
+			// @codeCoverageIgnoreStart
 			throw new RuntimeException( 'Error extracting XMP, '
 				. "encountered <$elm> with no mode" );
+			// @codeCoverageIgnoreEnd
 		}
 
 		switch ( $this->mode[0] ) {
@@ -1345,7 +1359,9 @@ class Reader implements LoggerAwareInterface {
 				$this->startElementModeQDesc( $elm, $attribs );
 				break;
 			default:
+				// @codeCoverageIgnoreStart
 				throw new RuntimeException( 'StartElement in unknown mode: ' . $this->mode[0] );
+				// @codeCoverageIgnoreEnd
 		}
 	}
 

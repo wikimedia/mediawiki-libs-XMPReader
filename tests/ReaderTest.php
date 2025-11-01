@@ -55,7 +55,6 @@ class ReaderTest extends TestCase {
 
 	public static function provideXMPParse() {
 		$xmpPath = __DIR__ . '/data/';
-		$data = [];
 
 		// $xmpFiles format: array of arrays with first arg file base name,
 		// with the actual file having .xmp on the end for the xmp
@@ -107,20 +106,17 @@ class ReaderTest extends TestCase {
 			[ 'badattribs', 'Not allowed attribute' ],
 			[ 'earlychar', 'Characters before rdf:Description' ],
 			[ 'toptype', 'Top level rdf:type' ],
+			[ 'doctype-included', 'XMP includes doctype' ],
 		];
 
-		$xmpFiles[] = [ 'doctype-included', 'XMP includes doctype' ];
-
-		foreach ( $xmpFiles as $file ) {
-			$xmp = file_get_contents( $xmpPath . $file[0] . '.xmp' );
+		foreach ( $xmpFiles as [ $base, $infotext ] ) {
+			$xmp = file_get_contents( $xmpPath . $base . '.xmp' );
 			// I'm not sure if this is the best way to handle getting the
 			// result array, but it seems kind of big to put directly in the test
 			// file.
-			$result = require $xmpPath . $file[0] . '.result.php';
-			$data[] = [ $xmp, $result, '[' . $file[0] . '.xmp] ' . $file[1] ];
+			$result = require $xmpPath . $base . '.result.php';
+			yield $base => [ $xmp, $result, '[' . $base . '.xmp] ' . $infotext ];
 		}
-
-		return $data;
 	}
 
 	/** Test ExtendedXMP block support. (Used when the XMP has to be split
