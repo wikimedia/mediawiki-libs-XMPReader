@@ -171,7 +171,6 @@ class Reader implements LoggerAwareInterface {
 	 */
 	private function destroyXMLParser(): void {
 		if ( $this->xmlParser ) {
-			xml_parser_free( $this->xmlParser );
 			$this->xmlParser = null;
 		}
 	}
