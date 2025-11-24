@@ -320,26 +320,14 @@ class Reader implements LoggerAwareInterface {
 				if ( preg_match( '/\xEF\xBB\xBF|\xFE\xFF|\x00\x00\xFE\xFF|\xFF\xFE\x00\x00|\xFF\xFE/',
 					$content, $bom )
 				) {
-					switch ( $bom[0] ) {
-						case "\xFE\xFF":
-							$this->charset = 'UTF-16BE';
-							break;
-						case "\xFF\xFE":
-							$this->charset = 'UTF-16LE';
-							break;
-						case "\x00\x00\xFE\xFF":
-							$this->charset = 'UTF-32BE';
-							break;
-						case "\xFF\xFE\x00\x00":
-							$this->charset = 'UTF-32LE';
-							break;
-						case "\xEF\xBB\xBF":
-							$this->charset = 'UTF-8';
-							break;
-						default:
-							// this should be impossible to get to
-							throw new RuntimeException( "Invalid BOM" );
-					}
+					$this->charset = match ( $bom[0] ) {
+						"\xFE\xFF" => 'UTF-16BE',
+						"\xFF\xFE" => 'UTF-16LE',
+						"\x00\x00\xFE\xFF" => 'UTF-32BE',
+						"\xFF\xFE\x00\x00" => 'UTF-32LE',
+						"\xEF\xBB\xBF" => 'UTF-8',
+						default => throw new RuntimeException( "Invalid BOM" ),
+					};
 				} else {
 					// standard specifically says, if no bom assume utf-8
 					$this->charset = 'UTF-8';
