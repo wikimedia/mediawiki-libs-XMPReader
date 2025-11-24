@@ -163,11 +163,7 @@ class Reader implements LoggerAwareInterface {
 	}
 
 	/**
-	 * free the XML parser.
-	 *
-	 * @note It is unclear to me if we really need to do this ourselves
-	 *  or if php garbage collection will automatically free the xmlParser
-	 *  when it is no longer needed.
+	 * Destroy the XML parser, usually after errors.
 	 */
 	private function destroyXMLParser(): void {
 		if ( $this->xmlParser ) {
