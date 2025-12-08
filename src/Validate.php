@@ -13,6 +13,7 @@ use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
 use Psr\Log\LoggerInterface;
 use Wikimedia\Timestamp\ConvertibleTimestamp;
+use Wikimedia\Timestamp\TimestampFormat as TS;
 
 /**
  * This contains some static methods for
@@ -288,7 +289,7 @@ class Validate implements LoggerAwareInterface {
 	 * YYYY-MM-DDThh:mm:ss.sTZD
 	 *
 	 * @param array $info Information about current property
-	 * @param mixed &$val Current value to validate. Converts to TS_EXIF as a side effect.
+	 * @param mixed &$val Current value to validate. Converts to TS::EXIF as a side effect.
 	 *    in cases where there's only a partial date, it will give things like
 	 *    2011:04.
 	 * @param bool $standalone If this is a simple property or array
@@ -370,7 +371,8 @@ class Validate implements LoggerAwareInterface {
 		// We know that if we got to this step, year, month day hour and min must be set
 		// by virtue of regex not failing.
 
-		$unix = ConvertibleTimestamp::convert( TS_UNIX,
+		$unix = ConvertibleTimestamp::convert(
+			TS::UNIX,
 			$res[1] . $res[2] . $res[3] . $res[4] . $res[5] . $res[6]
 		);
 		$offset = (int)substr( $res[7], 1, 2 ) * 60 * 60;
@@ -378,7 +380,7 @@ class Validate implements LoggerAwareInterface {
 		if ( str_starts_with( $res[7], '-' ) ) {
 			$offset = -$offset;
 		}
-		$val = ConvertibleTimestamp::convert( TS_EXIF, (int)$unix + $offset );
+		$val = ConvertibleTimestamp::convert( TS::EXIF, (int)$unix + $offset );
 
 		if ( $stripSeconds ) {
 			// If seconds weren't specified, remove the trailing ':00'.
