@@ -12,6 +12,7 @@ namespace Wikimedia\XMPReader;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
 use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 use Wikimedia\Timestamp\ConvertibleTimestamp;
 use Wikimedia\Timestamp\TimestampFormat as TS;
 
@@ -42,11 +43,9 @@ class Validate implements LoggerAwareInterface {
 
 	/**
 	 * Creates a new instance, with a logger
-	 *
-	 * @param LoggerInterface $logger
 	 */
-	public function __construct( LoggerInterface $logger ) {
-		$this->setLogger( $logger );
+	public function __construct( ?LoggerInterface $logger = null ) {
+		$this->setLogger( $logger ?? new NullLogger() );
 	}
 
 	/**

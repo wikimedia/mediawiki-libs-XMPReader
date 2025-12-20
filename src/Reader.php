@@ -136,11 +136,7 @@ class Reader implements LoggerAwareInterface {
 	 * @param string $filename
 	 */
 	public function __construct( ?LoggerInterface $logger = null, $filename = 'unknown' ) {
-		if ( $logger ) {
-			$this->setLogger( $logger );
-		} else {
-			$this->setLogger( new NullLogger() );
-		}
+		$this->setLogger( $logger ?? new NullLogger() );
 		$this->filename = $filename;
 
 		$this->items = Info::getItems();
