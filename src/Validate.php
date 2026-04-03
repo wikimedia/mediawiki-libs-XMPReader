@@ -82,7 +82,7 @@ class Validate implements LoggerAwareInterface {
 			return;
 			// @codeCoverageIgnoreEnd
 		}
-		if ( !preg_match( '/^(?:-?\d+)\/(?:\d+[1-9]|[1-9]\d*)$/D', $val ) ) {
+		if ( !is_string( $val ) || !preg_match( '/^(?:-?\d+)\/(?:\d+[1-9]|[1-9]\d*)$/D', $val ) ) {
 			$this->logger->info( __METHOD__ . " Expected rational but got $val" );
 			$val = null;
 		}
@@ -105,7 +105,7 @@ class Validate implements LoggerAwareInterface {
 			return;
 			// @codeCoverageIgnoreEnd
 		}
-		if ( !preg_match( '/^[-+]?\d*(?:\.?\d*)$/D', $val )
+		if ( ( is_string( $val ) && !preg_match( '/^[-+]?\d*(?:\.?\d*)$/D', $val ) )
 			|| !is_numeric( $val )
 		) {
 			$this->logger->info( __METHOD__ . " Expected rating but got $val" );
@@ -144,7 +144,10 @@ class Validate implements LoggerAwareInterface {
 			return;
 			// @codeCoverageIgnoreEnd
 		}
-		if ( !preg_match( '/^[-+]?\d+$/D', $val ) ) {
+		if ( is_int( $val ) ) {
+			return;
+		}
+		if ( !is_string( $val ) || !preg_match( '/^[-+]?\d+$/D', $val ) ) {
 			$this->logger->info( __METHOD__ . " Expected integer but got $val" );
 			$val = null;
 		}
@@ -269,7 +272,7 @@ class Validate implements LoggerAwareInterface {
 			return;
 			// @codeCoverageIgnoreEnd
 		}
-		if ( !preg_match( '/^[-A-Za-z0-9]{2,}$/D', $val ) ) {
+		if ( !is_string( $val ) || !preg_match( '/^[-A-Za-z0-9]{2,}$/D', $val ) ) {
 			// this is a rather naive check.
 			$this->logger->info( __METHOD__ . " Expected Lang code but got $val" );
 			$val = null;
@@ -301,7 +304,7 @@ class Validate implements LoggerAwareInterface {
 			// @codeCoverageIgnoreEnd
 		}
 		$res = [];
-		if ( !preg_match(
+		if ( !is_string( $val ) || !preg_match(
 			/* ahh! scary regex... */
 			// phpcs:ignore Generic.Files.LineLength
 			'/^([0-3]\d{3})(?:-([01]\d)(?:-([0-3]\d)(?:T([0-2]\d):([0-6]\d)(?::([0-6]\d)(?:\.\d+)?)?([-+]\d{2}:\d{2}|Z)?)?)?)?$/D',
@@ -408,7 +411,7 @@ class Validate implements LoggerAwareInterface {
 		}
 
 		$m = [];
-		if ( preg_match(
+		if ( is_string( $val ) && preg_match(
 			'/(\d{1,3}),(\d{1,2}),(\d{1,2})([NWSE])/D',
 			$val, $m )
 		) {
@@ -423,7 +426,7 @@ class Validate implements LoggerAwareInterface {
 			return;
 		}
 
-		if ( preg_match(
+		if ( is_string( $val ) && preg_match(
 			'/(\d{1,3}),(\d{1,2}(?:.\d*)?)([NWSE])/D',
 			$val, $m )
 		) {
