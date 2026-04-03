@@ -1,4 +1,6 @@
 <?php
+declare( strict_types = 1 );
+
 /**
  * Reader for XMP data containing properties relevant to images.
  *
