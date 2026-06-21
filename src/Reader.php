@@ -141,7 +141,7 @@ class Reader implements LoggerAwareInterface {
 		$this->setLogger( $logger ?? new NullLogger() );
 		$this->filename = $filename;
 
-		$this->items = Info::getItems();
+		$this->items = Info::ITEMS;
 
 		$this->resetXMLParser();
 	}
