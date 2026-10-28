@@ -20,7 +20,7 @@ use Wikimedia\Timestamp\TimestampFormat as TS;
 
 /**
  * This contains some static methods for
- * validating XMP properties. See XMPInfo and Reader classes.
+ * validating XMP properties. See Info and Reader classes.
  *
  * Each of these functions take the same parameters
  * * an info array which is a subset of the Info::ITEMS array
